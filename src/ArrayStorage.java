@@ -8,20 +8,18 @@ public class ArrayStorage {
     int count = 0;
 
     void clear() {
-        Arrays.fill(storage, 0, storage.length, null);
+        Arrays.fill(storage, 0, count, null);
     }
 
     void save(Resume r) {
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] == null) {
-                storage[i] = r;
-                break;
-            }
+        for (int i = 0; i < count + 1; i++) {
+            storage[i] = r;
         }
+        count++;
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < storage.length; i++) {
+        for (int i = 0; i < count; i++) {
             if (storage[i].uuid == uuid) {
                 return storage[i];
             }
@@ -30,28 +28,20 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int k = 1;
-        for (int i = 0; i < k; i++) {
-            for (int j = 0; j < storage.length - 1; j++)
-                storage[j] = storage[j + 1];
-            storage[storage.length - 1] = null;
-        }
+        for (int j = 0; j < count - 1; j++)
+            if (storage[j].uuid == uuid) {
+            }
+        count--;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(storage, 3);
+        return Arrays.copyOf(storage, count);
     }
 
     int size() {
-        for (int i = 0; i > storage.length; i++) {
-            if (storage[i] != null) {
-                count++;
-            }
-            System.out.print(count);
-        }
-        return 0;
+        return count;
     }
 }
