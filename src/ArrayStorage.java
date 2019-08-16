@@ -12,9 +12,7 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        for (int i = 0; i < count + 1; i++) {
-            storage[i] = r;
-        }
+        storage[count] = r;
         count++;
     }
 
@@ -28,9 +26,12 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for (int j = 0; j < count - 1; j++)
-            if (storage[j].uuid == uuid) {
-            }
+        for (int i = 0; i < count; i++) {
+            if (storage[i].uuid == uuid)
+                break;
+        }
+        for (int k = count; k < count - 1; k++)
+            storage[k] = storage[k + 1];
         count--;
     }
 
