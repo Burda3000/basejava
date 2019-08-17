@@ -31,7 +31,7 @@ public class ArrayStorage {
                 break;
         }
         for (int k = count; k < count - 1; k++)
-            storage[k] = storage[k + 1];
+            storage[k].uuid = storage[k + 1].uuid;
         count--;
     }
 
