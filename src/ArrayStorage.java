@@ -11,15 +11,38 @@ public class ArrayStorage {
         Arrays.fill(storage, 0, count, null);
     }
 
+    void update(Resume r) {
+        for (int i = 0; i < count; i++) {
+            if (r.uuid == storage[i].uuid) {
+                storage[i].uuid = r.uuid;
+            } else {
+                System.out.println("Error");
+            }
+        }
+    }
+
     void save(Resume r) {
-        storage[count] = r;
-        count++;
+        for (int i = 0; i < count; i++) {
+            if (count > storage.length) {
+                System.out.println("Error: The storage is already full");
+                break;
+            }
+        }
+
+        if (r != storage[count]) {
+            storage[count] = r;
+            count++;
+        } else {
+            System.out.println("Error: This resume is already in the storage");
+        }
     }
 
     Resume get(String uuid) {
         for (int i = 0; i < count; i++) {
             if (storage[i].uuid == uuid) {
                 return storage[i];
+            } else {
+                System.out.println("Error: The resume doesn't exist");
             }
         }
         return null;
@@ -27,12 +50,15 @@ public class ArrayStorage {
 
     void delete(String uuid) {
         for (int i = 0; i < count; i++) {
-            if (storage[i].uuid == uuid)
+            if (uuid != storage[i].uuid) {
+                System.out.println("Error: The resume doesn't exist");
                 break;
+            } else {
+                for (int k = count; k < count - 1; k++)
+                    storage[k].uuid = storage[k + 1].uuid;
+                count--;
+            }
         }
-        for (int k = count; k < count - 1; k++)
-            storage[k].uuid = storage[k + 1].uuid;
-        count--;
     }
 
     /**
