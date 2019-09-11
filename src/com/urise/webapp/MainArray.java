@@ -29,7 +29,6 @@ public class MainArray {
                 uuid = params[1].intern();
             }
             switch (params[0]) {
-
                 case "update":
                     r = new Resume();
                     r.setUuid(uuid);

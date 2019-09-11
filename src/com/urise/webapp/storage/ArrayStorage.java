@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10_000];
     private int count = 0;
 
     public void clear() {
@@ -16,25 +16,18 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        for (int i = 0; i < count; i++) {
-            if (storage[i].getUuid().equals(storage[i].getUuid())) {
-                storage[i] = resume;
-                break;
-            } else {
-                System.out.println("Error: The resume is already updated");
-            }
-        }
+        getEquals(resume);
     }
 
     public void save(Resume resume) {
-        for (int i = 0; i < count; i++) {
+        for (int j = 0; j < storage.length; j++) {
             if (count > storage.length) {
                 System.out.println("Error: The storage is already full");
                 break;
+            } else {
+                getEquals(resume);
             }
         }
-        storage[count] = resume;
-        count++;
     }
 
     public Resume get(String uuid) {
@@ -55,6 +48,7 @@ public class ArrayStorage {
                 break;
             } else {
                 System.out.println("Error: The resume doesn't exist");
+                break;
             }
         }
     }
@@ -68,5 +62,18 @@ public class ArrayStorage {
 
     public int size() {
         return count;
+    }
+
+    public void getEquals(Resume value) {
+        for (int i = 0; i < count; i++) {
+            if (storage[i].getUuid().equals(value.getUuid())) {
+                storage[i] = value;
+                count++; //ошибка NPE или не происходит запись uuid
+                break;
+            } else {
+                System.out.println("Error: ... ");
+                break;
+            }
+        }
     }
 }
