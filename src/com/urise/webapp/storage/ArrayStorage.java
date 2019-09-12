@@ -10,13 +10,22 @@ import java.util.Arrays;
 public class ArrayStorage {
     private Resume[] storage = new Resume[10_000];
     private int count = 0;
+//    private int i = 0;
 
     public void clear() {
         Arrays.fill(storage, 0, count, null);
     }
 
     public void update(Resume resume) {
-        getEquals(resume);
+        for (int i = 0; i < count; i++) {
+            if (storage[i].getUuid().equals(resume.getUuid())) {
+                storage[i] = resume;
+                break;
+            } else {
+                System.out.println("Error: The resume is not updated. The 'uuids' are not equals");
+                break;
+            }
+        }
     }
 
     public void save(Resume resume) {
@@ -24,8 +33,13 @@ public class ArrayStorage {
             if (count > storage.length) {
                 System.out.println("Error: The storage is already full");
                 break;
+            } else if (storage[count] != null) {
+                System.out.println("Error: The resume is already into the storage ");
+                break;
             } else {
-                getEquals(resume);
+                storage[count] = resume;
+                count++;
+                break;
             }
         }
     }
@@ -64,16 +78,22 @@ public class ArrayStorage {
         return count;
     }
 
-    public void getEquals(Resume value) {
-        for (int i = 0; i < count; i++) {
+
+    // integer - для счетчиков
+    // resume - для входящего параметра
+    public void getEquals(int integer, Resume value) {
+        for (int i = 0; i < integer; i++) {
             if (storage[i].getUuid().equals(value.getUuid())) {
                 storage[i] = value;
-                count++; //ошибка NPE или не происходит запись uuid
+                break;
+            } else if () {
+
                 break;
             } else {
-                System.out.println("Error: ... ");
+
                 break;
             }
         }
     }
+
 }
