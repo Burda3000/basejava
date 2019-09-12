@@ -10,7 +10,6 @@ import java.util.Arrays;
 public class ArrayStorage {
     private Resume[] storage = new Resume[10_000];
     private int count = 0;
-//    private int i = 0;
 
     public void clear() {
         Arrays.fill(storage, 0, count, null);
@@ -33,7 +32,7 @@ public class ArrayStorage {
             if (count > storage.length) {
                 System.out.println("Error: The storage is already full");
                 break;
-            } else if (storage[count] != null) {
+            } else if (storage[j].getUuid().equals(resume.getUuid())) {
                 System.out.println("Error: The resume is already into the storage ");
                 break;
             } else {
@@ -77,23 +76,4 @@ public class ArrayStorage {
     public int size() {
         return count;
     }
-
-
-    // integer - для счетчиков
-    // resume - для входящего параметра
-    public void getEquals(int integer, Resume value) {
-        for (int i = 0; i < integer; i++) {
-            if (storage[i].getUuid().equals(value.getUuid())) {
-                storage[i] = value;
-                break;
-            } else if () {
-
-                break;
-            } else {
-
-                break;
-            }
-        }
-    }
-
 }
