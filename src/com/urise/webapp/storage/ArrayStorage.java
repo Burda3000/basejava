@@ -16,25 +16,11 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-
-        for (int i = 0; i < count; i++) {
-            if (storage[i].getUuid().equals(resume.getUuid())) {
-                storage[i] = resume;
-                break;
-            } else {
-                System.out.println("Error: The resume is not updated. The 'uuids' are not equals");
-                break;
-            }
+        if (isResumeEquals(resume.getUuid())) {
+            storage[count] = resume;
+        } else {
+            System.out.println("Error: The resume is not updated. The 'uuids' are not equals");
         }
-//        for (int i = 0; i < count; i++) {
-//            if (storage[i].getUuid().equals(resume.getUuid())) {
-//                storage[i] = resume;
-//                break;
-//            } else {
-//                System.out.println("Error: The resume is not updated. The 'uuids' are not equals");
-//                break;
-//            }
-//        }
     }
 
     public void save(Resume resume) {
@@ -43,48 +29,32 @@ public class ArrayStorage {
                 System.out.println("Error: The storage is already full");
                 break;
             }
-//            if (getEquals(count, resume.getUuid())) {
-//                System.out.println("Error: The resume is already into the storage ");
-//                break;
-//            } else {
-//                storage[count] = resume;
-//                count++;
-//                break;
-//            }
 
-            for (int i = 0; i < count; i++) {
-                if (storage[i].getUuid().equals(resume.getUuid())) {
-                    System.out.println("Error: The resume is already into the storage ");
-                    break;
-                } else {
-                    storage[count] = resume;
-                    count++;
-                    break;
-                }
+            if (isResumeEquals(resume.getUuid())) {
+                System.out.println("Error: The resume is already into the storage ");
+                break;
+            } else {
+                storage[count] = resume;
+                count++;
+                break;
             }
         }
     }
 
     public Resume get(String uuid) {
-        for (int i = 0; i < count; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                return storage[i];
-            }
+        if (isResumeEquals(uuid)) {
+            return storage[count];
         }
         return null;
     }
 
     public void delete(String uuid) {
-        for (int i = 0; i < count; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                for (int k = count; k < count - 1; k++)
-                    storage[k] = storage[k + 1];
-                count--;
-                break;
-            } else {
-                System.out.println("Error: The resume doesn't exist");
-                break;
-            }
+        if (isResumeEquals(uuid)) {
+            for (int k = count; k < count - 1; k++)
+                storage[k] = storage[k + 1];
+            count--;
+        } else {
+            System.out.println("Error: The resume doesn't exist");
         }
     }
 
@@ -99,13 +69,12 @@ public class ArrayStorage {
         return count;
     }
 
-    //integer = count;
-//    public boolean getEquals (int integer, String resume) {
-//        for (int i = 0; i < integer; i++) {
-//            if (storage[i].getUuid().equals(resume)) {
-//                break;
-//            }
-//        }
-//        return false;
-//    }
+    private boolean isResumeEquals(String uuid) {
+        for (int i = 0; i < count; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
