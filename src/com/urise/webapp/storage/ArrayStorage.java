@@ -10,6 +10,7 @@ import java.util.Arrays;
 public class ArrayStorage {
     private Resume[] storage = new Resume[10_000];
     private int count = 0;
+    private int recInResum = 0;
 
     public void clear() {
         Arrays.fill(storage, 0, count, null);
@@ -17,7 +18,7 @@ public class ArrayStorage {
 
     public void update(Resume resume) {
         if (isResumeEquals(resume.getUuid())) {
-            storage[count] = resume;
+            storage[recInResum] = resume;
         } else {
             System.out.println("Error: The resume is not updated. The 'uuids' are not equals");
         }
@@ -34,8 +35,9 @@ public class ArrayStorage {
                 System.out.println("Error: The resume is already into the storage ");
                 break;
             } else {
-                storage[count] = resume;
+                storage[recInResum] = resume;
                 count++;
+                recInResum++;
                 break;
             }
         }
@@ -43,7 +45,7 @@ public class ArrayStorage {
 
     public Resume get(String uuid) {
         if (isResumeEquals(uuid)) {
-            return storage[count];
+            return storage[recInResum];
         }
         return null;
     }
