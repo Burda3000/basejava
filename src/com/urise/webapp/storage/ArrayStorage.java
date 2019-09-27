@@ -17,46 +17,41 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        getCheckingResume(resume.getUuid());
         if (index < 0) {
             System.out.println("Error: The resume is not updated. The 'uuids' are not equals");
         } else {
-            storage[index] = resume;
+            storage[count] = resume;
         }
     }
 
     public void save(Resume resume) {
-        for (int j = 0; j < storage.length; j++) {
+        for (int j = 0; j < count; j++) {
             if (count > storage.length) {
                 System.out.println("Error: The storage is already full");
                 break;
             }
+        }
 
-            getCheckingResume(resume.getUuid());
-            if (index < 0) {
-                System.out.println("Error: The resume is already into the storage ");
-            } else {
-                storage[index] = resume;
-                count++;
-                index++;
-                break;
-            }
+        //            index = getIndex(resume.getUuid());
+        if (index < getIndex(resume.getUuid())) {
+            System.out.println("Error: The resume is already into the storage ");
+        } else {
+            storage[count] = resume;
+            count++;
+//            index++;
         }
     }
 
     public Resume get(String uuid) {
-        getCheckingResume(uuid);
-        if (index > 0) {
-            return storage[index];
+        if (getIndex(uuid) > 0) {
+            return storage[count];
         }
         return null;
     }
 
     public void delete(String uuid) {
-        getCheckingResume(uuid);
-        if (index > 0) {
-            for (int k = count; k < count - 1; k++)
-                storage[k] = storage[k + 1];
+        if (getIndex(uuid) < 0) {
+            if (count - 1 - count >= 0) System.arraycopy(storage, count + 1, storage, count, count - 1 - count);
             count--;
             index--;
         } else {
@@ -75,10 +70,10 @@ public class ArrayStorage {
         return count;
     }
 
-    private int getCheckingResume(String uuid) {
+    private int getIndex(String uuid) {
         for (int i = 0; i < count; i++) {
             if (storage[i].getUuid().equals(uuid)) {
-                return index;
+                return i;
             }
         }
         return -1;
