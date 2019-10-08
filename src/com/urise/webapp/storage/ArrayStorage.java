@@ -14,13 +14,15 @@ public class ArrayStorage {
 
     public void clear() {
         Arrays.fill(storage, 0, count, null);
+        count = 0;
     }
 
     public void update(Resume resume) {
+        index = getIndex(resume.getUuid());
         if (index < 0) {
             System.out.println("Error: The resume is not updated. The 'uuids' are not equals");
         } else {
-            storage[count] = resume;
+            storage[index] = resume;
         }
     }
 
@@ -32,28 +34,25 @@ public class ArrayStorage {
             }
         }
 
-        //            index = getIndex(resume.getUuid());
-        if (index < getIndex(resume.getUuid())) {
+        if (index <= getIndex(resume.getUuid())) {
             System.out.println("Error: The resume is already into the storage ");
         } else {
             storage[count] = resume;
             count++;
-//            index++;
         }
     }
 
     public Resume get(String uuid) {
-        if (getIndex(uuid) > 0) {
-            return storage[count];
+        if (getIndex(uuid) >= 0) {
+            return storage[getIndex(uuid)];
         }
         return null;
     }
 
     public void delete(String uuid) {
-        if (getIndex(uuid) < 0) {
+        if (getIndex(uuid) >= index) {
             if (count - 1 - count >= 0) System.arraycopy(storage, count + 1, storage, count, count - 1 - count);
             count--;
-            index--;
         } else {
             System.out.println("Error: The resume doesn't exist");
         }
