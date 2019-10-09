@@ -10,7 +10,6 @@ import java.util.Arrays;
 public class ArrayStorage {
     private Resume[] storage = new Resume[10_000];
     private int count = 0;
-    private int index = 0;
 
     public void clear() {
         Arrays.fill(storage, 0, count, null);
@@ -18,24 +17,25 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        index = getIndex(resume.getUuid());
+        int index = getIndex(resume.getUuid());
         if (index < 0) {
-            System.out.println("Error: The resume is not updated. The 'uuids' are not equals");
+            System.out.println("Error: The " + resume.getUuid() + " is not updated. The 'uuids' are not equals");
         } else {
             storage[index] = resume;
         }
     }
 
     public void save(Resume resume) {
-        for (int j = 0; j < count; j++) {
+        for (int i = 0; i < count; i++) {
             if (count > storage.length) {
                 System.out.println("Error: The storage is already full");
                 break;
             }
         }
 
-        if (index <= getIndex(resume.getUuid())) {
-            System.out.println("Error: The resume is already into the storage ");
+        int index = getIndex(resume.getUuid());
+        if (index >= 0) {
+            System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
         } else {
             storage[count] = resume;
             count++;
@@ -43,18 +43,20 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        if (getIndex(uuid) >= 0) {
-            return storage[getIndex(uuid)];
+        int index = getIndex(uuid);
+        if (index >= 0) {
+            return storage[index];
         }
         return null;
     }
 
     public void delete(String uuid) {
-        if (getIndex(uuid) >= index) {
+        int index = getIndex(uuid);
+        if (index >= 0) {
             if (count - 1 - count >= 0) System.arraycopy(storage, count + 1, storage, count, count - 1 - count);
             count--;
         } else {
-            System.out.println("Error: The resume doesn't exist");
+            System.out.println("Error: The " + uuid + " doesn't exist");
         }
     }
 
