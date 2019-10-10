@@ -26,15 +26,10 @@ public class ArrayStorage {
     }
 
     public void save(Resume resume) {
-        for (int i = 0; i < count; i++) {
-            if (count > storage.length) {
-                System.out.println("Error: The storage is already full");
-                break;
-            }
-        }
-
         int index = getIndex(resume.getUuid());
-        if (index >= 0) {
+        if (count > storage.length) {
+            System.out.println("Error: The storage is already full");
+        } else if (index >= 0) {
             System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
         } else {
             storage[count] = resume;
