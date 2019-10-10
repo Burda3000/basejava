@@ -41,6 +41,8 @@ public class ArrayStorage {
         int index = getIndex(uuid);
         if (index >= 0) {
             return storage[index];
+        } else {
+            System.out.print("Error: The " + uuid + " is ");
         }
         return null;
     }
@@ -48,7 +50,7 @@ public class ArrayStorage {
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index >= 0) {
-            if (count - 1 - count >= 0) System.arraycopy(storage, count + 1, storage, count, count - 1 - count);
+            System.arraycopy(storage, count + 1, storage, count, count - 1 - count);
             count--;
         } else {
             System.out.println("Error: The " + uuid + " doesn't exist");
