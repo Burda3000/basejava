@@ -41,9 +41,8 @@ public class ArrayStorage {
         int index = getIndex(uuid);
         if (index >= 0) {
             return storage[index];
-        } else {
-            System.out.print("Error: The " + uuid + " is ");
         }
+        System.out.print("Error: The " + uuid + " is ");
         return null;
     }
 
