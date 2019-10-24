@@ -8,11 +8,11 @@ public abstract class AbstractArrayStorage implements Storage {
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int count = 0;
 
-    public int size() {
+    final public int size() {
         return count;
     }
 
-    public Resume get(String uuid) {
+    final public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index >= 0) {
             return storage[index];
@@ -20,6 +20,16 @@ public abstract class AbstractArrayStorage implements Storage {
         System.out.print("Error: The " + uuid + " is ");
         return null;
     }
+
+    public abstract void clear();
+
+    public abstract void update(Resume resume);
+
+    public abstract void save(Resume resume);
+
+    public abstract void delete(String uuid);
+
+    public abstract Resume[] getAll();
 
     protected abstract int getIndex(String uuid);
 }
