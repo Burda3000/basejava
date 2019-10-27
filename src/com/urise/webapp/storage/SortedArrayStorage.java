@@ -18,7 +18,15 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void save(Resume resume) {
-
+        int index = getIndex(resume.getUuid());
+        if (count > storage.length) {
+            System.out.println("Error: The storage is already full");
+        } else if (index >= 0) {
+            System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
+        } else {
+            storage[count] = resume;
+            count++;
+        }
     }
 
     @Override
