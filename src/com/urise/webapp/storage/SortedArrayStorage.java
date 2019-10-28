@@ -21,12 +21,13 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int index = getIndex(resume.getUuid());
         if (count > storage.length) {
             System.out.println("Error: The storage is already full");
-        } else if (index >= 0) {
-            System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
-        } else {
+        } else if (index < 0) {
             storage[count] = resume;
             count++;
+        } else {
+            System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
         }
+        System.out.println(Arrays.toString(Arrays.copyOfRange(storage, 0, count)));
     }
 
     @Override
