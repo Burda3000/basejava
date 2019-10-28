@@ -22,6 +22,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         if (count > storage.length) {
             System.out.println("Error: The storage is already full");
         } else if (index < 0) {
+            // typing code
+
             storage[count] = resume;
             count++;
         } else {
@@ -44,6 +46,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     protected int getIndex(String uuid) {
         Resume searchKey = new Resume();
         searchKey.setUuid(uuid);
-        return Arrays.binarySearch(storage, 0, count, searchKey);
+        return Arrays.binarySearch(storage, 0, count, searchKey, Resume::compareTo);
     }
 }
