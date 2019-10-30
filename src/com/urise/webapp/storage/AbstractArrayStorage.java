@@ -2,11 +2,13 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-public abstract class AbstractArrayStorage implements Storage {
-    protected static final int STORAGE_LIMIT = 10_000;
+import java.util.Arrays;
 
-    protected Resume[] storage = new Resume[STORAGE_LIMIT];
-    protected int count = 0;
+public abstract class AbstractArrayStorage implements Storage {
+    private static final int STORAGE_LIMIT = 10_000;
+
+    Resume[] storage = new Resume[STORAGE_LIMIT];
+    int count = 0;
 
     final public int size() {
         return count;
@@ -21,15 +23,35 @@ public abstract class AbstractArrayStorage implements Storage {
         return null;
     }
 
-    public abstract void clear();
+    public void clear() {
+        Arrays.fill(storage, 0, count, null);
+        count = 0;
+    }
 
-    public abstract void update(Resume resume);
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (index < 0) {
+            System.out.println("Error: The " + resume.getUuid() + " is not updated. The 'uuids' are not equals");
+        } else {
+            storage[index] = resume;
+        }
+    }
 
     public abstract void save(Resume resume);
 
-    public abstract void delete(String uuid);
+    public void delete(String uuid) {
+        int index = getIndex(uuid);
+        if (index >= 0) {
+            System.arraycopy(storage, count + 1, storage, count, count - 1 - count);
+            count--;
+        } else {
+            System.out.println("Error: The " + uuid + " doesn't exist");
+        }
+    }
 
-    public abstract Resume[] getAll();
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, count);
+    }
 
     protected abstract int getIndex(String uuid);
 }
