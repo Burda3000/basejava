@@ -23,12 +23,12 @@ public abstract class AbstractArrayStorage implements Storage {
         return null;
     }
 
-    public void clear() {
+    final public void clear() {
         Arrays.fill(storage, 0, count, null);
         count = 0;
     }
 
-    public void update(Resume resume) {
+    final public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (index < 0) {
             System.out.println("Error: The " + resume.getUuid() + " is not updated. The 'uuids' are not equals");
@@ -39,7 +39,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public abstract void save(Resume resume);
 
-    public void delete(String uuid) {
+    final public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index >= 0) {
             System.arraycopy(storage, count + 1, storage, count, count - 1 - count);
@@ -49,7 +49,7 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    public Resume[] getAll() {
+    final public Resume[] getAll() {
         return Arrays.copyOf(storage, count);
     }
 

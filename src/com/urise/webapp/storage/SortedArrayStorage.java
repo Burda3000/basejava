@@ -10,6 +10,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
 
+        System.out.println(index);
+
         if (count > storage.length) {
             System.out.println("Error: The storage is already full");
         } else if (index < 0) {
