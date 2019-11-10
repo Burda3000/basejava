@@ -8,18 +8,25 @@ import com.urise.webapp.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     public void save(Resume resume) {
-        storage[count] = resume;
-        count++;
+        int index = getIndex(resume.getUuid());
+        if (count > storage.length) {
+            System.out.println("Error: The storage is already full");
+        } else if (index < 0) { //index <= 0 - протестить вариант
+            storage[count] = resume;
+            count++;
+        } else {
+            System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
+        }
     }
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0) {
+        if (index <= 0) {
+            System.out.println("Error: The " + uuid + " doesn't exist");
+        } else {
             for (int k = count; k < count - 1; k++)
                 storage[k] = storage[k + 1];
             count--;
-        } else {
-            System.out.println("Error: The " + uuid + " doesn't exist");
         }
     }
 

@@ -16,11 +16,11 @@ public abstract class AbstractArrayStorage implements Storage {
 
     final public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0) {
-            return storage[index];
+        if (index <= 0) {
+            System.out.print("Error: The " + uuid + " is ");
+            return null;
         }
-        System.out.print("Error: The " + uuid + " is ");
-        return null;
+        return storage[index];
     }
 
     final public void clear() {
@@ -30,23 +30,14 @@ public abstract class AbstractArrayStorage implements Storage {
 
     final public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
-        if (index < 0) {
+        if (index < 0) { //index <= 0 - протестить вариант
             System.out.println("Error: The " + resume.getUuid() + " is not updated. The 'uuids' are not equals");
         } else {
             storage[index] = resume;
         }
     }
 
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (count > storage.length) {
-            System.out.println("Error: The storage is already full");
-        } else if (index <= 0) {
-            // empty body???
-        } else {
-            System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
-        }
-    }
+    public abstract void save(Resume resume);
 
     public abstract void delete(String uuid);
 
