@@ -11,7 +11,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         int index = getIndex(resume.getUuid());
         if (count > storage.length) {
             System.out.println("Error: The storage is already full");
-        } else if (index < 0) { //index <= 0 - протестить вариант
+        } else if (index < 0) {
             storage[count] = resume;
             count++;
         } else {
@@ -21,7 +21,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index <= 0) {
+        if (index < 0) {
             System.out.println("Error: The " + uuid + " doesn't exist");
         } else {
             for (int k = count; k < count - 1; k++)

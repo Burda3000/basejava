@@ -16,7 +16,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     final public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index <= 0) {
+        if (index < 0) {
             System.out.print("Error: The " + uuid + " is ");
             return null;
         }
@@ -30,7 +30,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     final public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
-        if (index < 0) { //index <= 0 - протестить вариант
+        if (index < 0) {
             System.out.println("Error: The " + resume.getUuid() + " is not updated. The 'uuids' are not equals");
         } else {
             storage[index] = resume;

@@ -11,19 +11,19 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int index = getIndex(resume.getUuid());
         if (count > storage.length) {
             System.out.println("Error: The storage is already full");
-        } else if (index < 0) { //index <= 0 - протестить вариант
+        } else if (index < 0) {
+            System.arraycopy(storage, (-index - 1), storage, (-index - 1) + 1, count);
             storage[-index - 1] = resume;
             count++;
         } else {
             System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
         }
-        System.arraycopy(storage, 0, storage, 0, 0);
     }
 
     @Override
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index <= 0) {
+        if (index < 0) {
             System.out.println("Error: The " + uuid + " doesn't exist");
         } else {
             for (int k = count; k < count - 1; k++)
