@@ -26,8 +26,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         if (index < 0) {
             System.out.println("Error: The " + uuid + " doesn't exist");
         } else {
-            for (int k = count; k < count - 1; k++)
-                storage[k] = storage[k + 1];
+            System.arraycopy(storage, index + 1, storage, index, count);
             count--;
         }
     }
