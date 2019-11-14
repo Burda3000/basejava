@@ -24,7 +24,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         if (index < 0) {
             System.out.println("Error: The " + uuid + " doesn't exist");
         } else {
-            System.arraycopy(storage, count + 1, storage, count, count - 1 - count);
+            System.arraycopy(storage, count - 1, storage, count, count - 1);
             count--;
         }
     }
