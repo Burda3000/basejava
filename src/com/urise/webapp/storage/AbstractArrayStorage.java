@@ -5,7 +5,7 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
-    private static final int STORAGE_LIMIT = 10_000;
+    private static final int STORAGE_LIMIT = 3;
 
     Resume[] storage = new Resume[STORAGE_LIMIT];
     int count = 0;
@@ -42,25 +42,26 @@ public abstract class AbstractArrayStorage implements Storage {
         if (count > storage.length) {
             System.out.println("Error: The storage is already full");
         } else if (index < 0) {
-            subSaveMethod(index, resume);
+            insert(index, resume);
+            count++;
         } else {
             System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
         }
     }
 
-    public abstract void subSaveMethod(int index, Resume resume);
+    public abstract void insert(int index, Resume resume);
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             System.out.println("Error: The " + uuid + " doesn't exist");
         } else {
-            subDeleteMethod(index);
+            remove(index);
             count--;
         }
     }
 
-    public abstract void subDeleteMethod(int index);
+    public abstract void remove(int index);
 
     final public Resume[] getAll() {
         return Arrays.copyOf(storage, count);

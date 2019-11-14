@@ -8,13 +8,12 @@ import com.urise.webapp.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void subSaveMethod(int index, Resume resume) {
+    public void insert(int index, Resume resume) {
         storage[count] = resume;
-        count++;
     }
 
     @Override
-    public void subDeleteMethod(int index) {
+    public void remove(int index) {
         System.arraycopy(storage, count - 1, storage, count, count - 1);
     }
 
