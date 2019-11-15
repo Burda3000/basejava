@@ -8,9 +8,9 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void insert(int index, Resume resume) {
-        int lastIndex = (-index - 1);
-        System.arraycopy(storage, lastIndex, storage, lastIndex + 1, count);
-        storage[lastIndex] = resume;
+        int finalIndex = (-index - 1);
+        System.arraycopy(storage, finalIndex, storage, finalIndex + 1, count);
+        storage[finalIndex] = resume;
     }
 
     @Override

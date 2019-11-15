@@ -39,7 +39,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
-        if (count > storage.length) {
+        if (count >= storage.length) {
             System.out.println("Error: The storage is already full");
         } else if (index < 0) {
             insert(index, resume);
