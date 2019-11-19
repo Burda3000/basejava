@@ -14,7 +14,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void remove(int index) {
-        System.arraycopy(storage, count - 1, storage, count - 1, index);
+        storage[index] = storage[count - 1];
     }
 
     protected int getIndex(String uuid) {

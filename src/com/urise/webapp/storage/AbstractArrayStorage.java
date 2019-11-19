@@ -57,6 +57,7 @@ public abstract class AbstractArrayStorage implements Storage {
             System.out.println("Error: The " + uuid + " doesn't exist");
         } else {
             remove(index);
+            storage[count - 1] = null;
             count--;
         }
     }
