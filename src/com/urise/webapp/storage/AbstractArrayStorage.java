@@ -1,5 +1,8 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exeption.ExistStorageException;
+import com.urise.webapp.exeption.NotExistStorageException;
+import com.urise.webapp.exeption.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -17,8 +20,7 @@ public abstract class AbstractArrayStorage implements Storage {
     final public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
-            System.out.print("Error: The " + uuid + " is ");
-            return null;
+            throw new NotExistStorageException(uuid);
         }
         return storage[index];
     }
@@ -31,7 +33,7 @@ public abstract class AbstractArrayStorage implements Storage {
     final public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (index < 0) {
-            System.out.println("Error: The " + resume.getUuid() + " is not updated. The 'uuids' are not equals");
+            throw new NotExistStorageException(resume.getUuid());
         } else {
             storage[index] = resume;
         }
@@ -40,12 +42,12 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (count >= storage.length) {
-            System.out.println("Error: The storage is already full");
+            throw new StorageException("Error: The storage is already full", resume.getUuid());
         } else if (index < 0) {
             insert(index, resume);
             count++;
         } else {
-            System.out.println("Error: The " + resume.getUuid() + " is already into the storage ");
+            throw new ExistStorageException(resume.getUuid());
         }
     }
 
@@ -54,7 +56,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
-            System.out.println("Error: The " + uuid + " doesn't exist");
+            throw new NotExistStorageException(uuid);
         } else {
             remove(index);
             storage[count - 1] = null;
