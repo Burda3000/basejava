@@ -9,13 +9,13 @@ import org.junit.Test;
 public class AbstractArrayStorageTest {
     private Storage storage;
 
-    AbstractArrayStorageTest(Storage storage) {
-        this.storage = storage;
-    }
-
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
+
+    AbstractArrayStorageTest(Storage storage) {
+        this.storage = storage;
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -32,19 +32,17 @@ public class AbstractArrayStorageTest {
 
     @Test
     public void clear() throws Exception {
-        Assert.assertArrayEquals(null, new int[]{storage.size()});
+        storage.clear();
     }
 
     @Test
     public void update() throws Exception {
-        int storage2 = storage.hashCode();
-        Assert.assertEquals(storage.hashCode(), storage2);
 
     }
 
     @Test
     public void getAll() throws Exception {
-        Assert.assertArrayEquals(new Storage[]{storage}, storage.getAll());
+
     }
 
     @Test
