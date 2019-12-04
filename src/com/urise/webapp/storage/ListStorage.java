@@ -6,31 +6,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-    public List<Resume> list = new ArrayList<>();
+    protected List<Resume> list = new ArrayList<>();
+
+    @Override
+    public void updating(Resume resume) {
+        //todo updating
+        // где взять индекс?
+        list.set(0, resume);
+    }
+
+    @Override
+    public void saving(Resume resume) {
+        //todo saving
+        // индекс?
+        list.add(resume);
+    }
+
+    @Override
+    public Resume getting(String uuid) {
+        //todo getting
+        // индекс?
+        return list.get(0);
+    }
+
+    @Override
+    public void deleting(String uuid) {
+        //todo deleteting
+        // индекс?
+        list.remove(uuid);
+    }
 
     @Override
     public void clear() {
-
-    }
-
-    @Override
-    public void update(Resume resume) {
-
-    }
-
-    @Override
-    public void save(Resume resume) {
-
-    }
-
-    @Override
-    public Resume get(String uuid) {
-        return null;
-    }
-
-    @Override
-    public void delete(String uuid) {
-
+        list.clear();
     }
 
     @Override
@@ -40,6 +48,6 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public int size() {
-        return 0;
+        return list.size();
     }
 }
