@@ -8,31 +8,36 @@ import java.util.List;
 public class ListStorage extends AbstractStorage {
     protected List<Resume> list = new ArrayList<>();
 
+    int index1 = list.indexOf();
+
     @Override
-    public void updating(Resume resume) {
+    public void doUpdate(Resume resume) {
         //todo updating
         // где взять индекс?
+        ifNotExist(resume.getUuid());
         list.set(0, resume);
     }
 
     @Override
-    public void saving(Resume resume) {
+    public void doSave(Resume resume) {
         //todo saving
         // индекс?
         list.add(resume);
     }
 
     @Override
-    public Resume getting(String uuid) {
+    public Resume doGet(String uuid) {
         //todo getting
         // индекс?
+        ifNotExist(uuid);
         return list.get(0);
     }
 
     @Override
-    public void deleting(String uuid) {
+    public void doDelete(String uuid) {
         //todo deleteting
         // индекс?
+        ifNotExist(uuid);
         list.remove(uuid);
     }
 
@@ -43,7 +48,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        return new Resume[0];
+        return list.toArray();
     }
 
     @Override
