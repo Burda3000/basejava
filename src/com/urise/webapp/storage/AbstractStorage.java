@@ -5,26 +5,26 @@ import com.urise.webapp.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     public void update(Resume resume) {
-        doUpdate(resume);
+        updating(resume);
     }
+
+    protected abstract void updating(Resume resume);
 
     public void save(Resume resume) {
-        doSave(resume);
+        saving(resume);
     }
+
+    protected abstract void saving(Resume resume);
 
     public Resume get(String uuid) {
-        return doGet(uuid);
+        return getting(uuid);
     }
+
+    protected abstract Resume getting(String uuid);
 
     public void delete(String uuid) {
-        doDelete(uuid);
+        deleting(uuid);
     }
 
-    protected abstract void doUpdate(Resume resume);
-
-    protected abstract void doSave(Resume resume);
-
-    protected abstract Resume doGet(String uuid);
-
-    protected abstract void doDelete(String uuid);
+    protected abstract void deleting(String uuid);
 }
