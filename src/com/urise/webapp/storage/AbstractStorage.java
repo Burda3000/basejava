@@ -8,23 +8,23 @@ public abstract class AbstractStorage implements Storage {
         updating(resume);
     }
 
-    protected abstract void updating(Resume resume);
-
     public void save(Resume resume) {
         saving(resume);
     }
 
-    protected abstract void saving(Resume resume);
-
     public Resume get(String uuid) {
         return getting(uuid);
     }
-
-    protected abstract Resume getting(String uuid);
 
     public void delete(String uuid) {
         deleting(uuid);
     }
 
     protected abstract void deleting(String uuid);
+
+    protected abstract void updating(Resume resume);
+
+    protected abstract void saving(Resume resume);
+
+    protected abstract Resume getting(String uuid);
 }
