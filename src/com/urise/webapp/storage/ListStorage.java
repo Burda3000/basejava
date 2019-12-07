@@ -6,39 +6,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-    protected List<Resume> list = new ArrayList<>();
+    private List<Resume> list = new ArrayList<>();
 
     @Override
-    public void updating(Resume resume) {
+    public void clear() {
+        list.clear();
+    }
+
+    @Override
+    public void doUpdate(Resume resume) {
         //todo updating
         // где взять индекс?
         list.set(0, resume);
     }
 
     @Override
-    public void saving(Resume resume) {
+    public void doSave(Resume resume) {
         //todo saving
         // индекс?
         list.add(resume);
     }
 
     @Override
-    public Resume getting(String uuid) {
+    public Resume doGet(String uuid) {
         //todo getting
         // индекс?
         return list.get(0);
     }
 
     @Override
-    public void deleting(String uuid) {
+    public void doDelete(String uuid) {
         //todo deleteting
         // индекс?
         list.remove(uuid);
-    }
-
-    @Override
-    public void clear() {
-        list.clear();
     }
 
     @Override
