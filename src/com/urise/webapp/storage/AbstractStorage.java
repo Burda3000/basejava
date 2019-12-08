@@ -1,5 +1,7 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exeption.ExistStorageException;
+import com.urise.webapp.exeption.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
@@ -18,6 +20,22 @@ public abstract class AbstractStorage implements Storage {
 
     public void delete(String uuid) {
         doDelete(uuid);
+    }
+
+    public void ifIndexNotExist(String uuid) {
+        if (index < 0) {
+            throw new NotExistStorageException(uuid);
+        } else {
+            return index;
+        }
+    }
+
+    public void ifIndexExist(String uuid) {
+        if (index < 0) {
+            return index;
+        } else {
+            throw new ExistStorageException(uuid);
+        }
     }
 
     protected abstract void doUpdate(Resume resume);

@@ -1,7 +1,5 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exeption.ExistStorageException;
-import com.urise.webapp.exeption.NotExistStorageException;
 import com.urise.webapp.exeption.StorageException;
 import com.urise.webapp.model.Resume;
 
@@ -20,46 +18,29 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public void doUpdate(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            storage[index] = resume;
-        }
+        storage[Integer.parseInt(resume.getUuid())] = resume;
     }
 
     @Override
     public void doSave(Resume resume) {
-        int index = getIndex(resume.getUuid());
         if (count >= storage.length) {
             throw new StorageException("Error: The storage is already full", resume.getUuid());
-        } else if (index < 0) {
-            insert(index, resume);
-            count++;
         } else {
-            throw new ExistStorageException(resume.getUuid());
+            insert(getIndex(resume.getUuid()), resume);
+            count++;
         }
     }
 
     @Override
     public Resume doGet(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return storage[index];
+        return storage[getIndex(uuid)];
     }
 
     @Override
     public void doDelete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            remove(index);
-            storage[count - 1] = null;
-            count--;
-        }
+        remove(getIndex(uuid));
+        storage[count - 1] = null;
+        count--;
     }
 
     public Resume[] getAll() {
