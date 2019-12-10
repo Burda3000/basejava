@@ -10,48 +10,49 @@ public abstract class AbstractStorage implements Storage {
 
     public void update(Resume resume) {
         Integer index = getIndex(resume.getUuid());
-        ifIndexNotExist(String.valueOf(index));
         doUpdate(resume, index);
     }
 
     public void save(Resume resume) {
-        ifIndexExist(resume.getUuid());
-        doSave(resume, Integer.valueOf(resume.getUuid()));
+        Integer index = getIndex(resume.getUuid());
+        doSave(resume, index);
     }
 
     public Resume get(String uuid) {
         Integer index = getIndex(uuid);
-        ifIndexNotExist(String.valueOf(index));
         return doGet(index);
     }
 
     public void delete(String uuid) {
         Integer index = getIndex(uuid);
-        ifIndexNotExist(String.valueOf(index));
         doDelete(index);
     }
 
-    private int ifIndexNotExist(String uuid) {
-        if (getIndex(uuid) == null) {
+    private Integer getIndexNotExist(String uuid) {
+        Integer getSearchingIndex = getIndex(uuid);
+        if (isExist(getSearchingIndex)) {
             throw new NotExistStorageException(uuid);
         } else {
-            return getIndex(uuid);
+            return getSearchingIndex;
         }
     }
 
-    private int ifIndexExist(String uuid) {
-        if (getIndex(uuid) != null) {
-            return getIndex(uuid);
+    private Integer getIndexExist(String uuid) {
+        Integer getSearchingIndex = getIndex(uuid);
+        if (!isExist(getSearchingIndex)) {
+            return getSearchingIndex;
         } else {
             throw new ExistStorageException(uuid);
         }
     }
 
-    protected abstract void doUpdate(Resume resume, Integer index);
+    public abstract boolean isExist(Integer index);
 
-    protected abstract void doSave(Resume resume, Integer index);
+    protected abstract void doUpdate(Resume resume, Integer getSearchingIndex);
 
-    protected abstract Resume doGet(Integer index);
+    protected abstract void doSave(Resume resume, Integer getSearchingIndex);
 
-    protected abstract void doDelete(Integer index);
+    protected abstract Resume doGet(Integer getSearchingIndex);
+
+    protected abstract void doDelete(Integer getSearchingIndex);
 }

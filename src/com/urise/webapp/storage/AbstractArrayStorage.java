@@ -51,6 +51,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return count;
     }
 
+    @Override
+    public boolean isExist(Integer index) {
+        return index < 0;
+    }
+
     public abstract void remove(int index);
 
     public abstract void insert(int index, Resume resume);

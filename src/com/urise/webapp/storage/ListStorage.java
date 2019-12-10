@@ -18,22 +18,10 @@ public class ListStorage extends AbstractStorage {
         return null;
     }
 
-//    public Integer getUuidIndex(String uuid) {
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).getUuid().equals(uuid)) {
-//                return i;
-//            }
-//        }
-//        return null;
-//    }
-//    for the future
-//    private boolean ifResumeExist(Resume resume) {
-//        return getArrayIndex(resume.getUuid()) != null;
-//    }
-//
-//    private boolean ifResumeNotExist(Resume resume) {
-//        return getArrayIndex(resume.getUuid()) == null;
-//    }
+    @Override
+    public boolean isExist(Integer index) {
+        return index != null;
+    }
 
     @Override
     public void clear() {
