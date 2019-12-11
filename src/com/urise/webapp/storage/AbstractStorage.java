@@ -29,9 +29,9 @@ public abstract class AbstractStorage implements Storage {
     private Integer getIndexNotExist(String uuid) {
         Integer searchingIndex = getIndex(uuid);
         if (isExist(searchingIndex)) {
-            throw new NotExistStorageException(uuid);
-        } else {
             return searchingIndex;
+        } else {
+            throw new NotExistStorageException(uuid);
         }
     }
 
@@ -48,11 +48,11 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract boolean isExist(Integer index);
 
-    protected abstract void doUpdate(Resume resume, Integer getSearchingIndex);
+    protected abstract void doUpdate(Resume resume, Integer searchIndex);
 
-    protected abstract void doSave(Resume resume, Integer getSearchingIndex);
+    protected abstract void doSave(Resume resume, Integer searchIndex);
 
-    protected abstract Resume doGet(Integer getSearchingIndex);
+    protected abstract Resume doGet(Integer searchIndex);
 
-    protected abstract void doDelete(Integer getSearchingIndex);
+    protected abstract void doDelete(Integer searchIndex);
 }
