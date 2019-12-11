@@ -6,47 +6,47 @@ import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
-    public abstract Integer getIndex(String uuid);
-
     public void update(Resume resume) {
-        Integer index = getIndex(resume.getUuid());
+        Integer index = getIndexNotExist(resume.getUuid());
         doUpdate(resume, index);
     }
 
     public void save(Resume resume) {
-        Integer index = getIndex(resume.getUuid());
+        Integer index = getIndexExist(resume.getUuid());
         doSave(resume, index);
     }
 
     public Resume get(String uuid) {
-        Integer index = getIndex(uuid);
+        Integer index = getIndexNotExist(uuid);
         return doGet(index);
     }
 
     public void delete(String uuid) {
-        Integer index = getIndex(uuid);
+        Integer index = getIndexNotExist(uuid);
         doDelete(index);
     }
 
     private Integer getIndexNotExist(String uuid) {
-        Integer getSearchingIndex = getIndex(uuid);
-        if (isExist(getSearchingIndex)) {
+        Integer searchingIndex = getIndex(uuid);
+        if (isExist(searchingIndex)) {
             throw new NotExistStorageException(uuid);
         } else {
-            return getSearchingIndex;
+            return searchingIndex;
         }
     }
 
     private Integer getIndexExist(String uuid) {
-        Integer getSearchingIndex = getIndex(uuid);
-        if (!isExist(getSearchingIndex)) {
-            return getSearchingIndex;
+        Integer searchingIndex = getIndex(uuid);
+        if (!isExist(searchingIndex)) {
+            return searchingIndex;
         } else {
             throw new ExistStorageException(uuid);
         }
     }
 
-    public abstract boolean isExist(Integer index);
+    protected abstract Integer getIndex(String uuid);
+
+    protected abstract boolean isExist(Integer index);
 
     protected abstract void doUpdate(Resume resume, Integer getSearchingIndex);
 

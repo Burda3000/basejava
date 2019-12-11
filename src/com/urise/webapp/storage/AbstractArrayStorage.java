@@ -53,7 +53,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public boolean isExist(Integer index) {
-        return index < 0;
+        return index >= 0;
     }
 
     public abstract void remove(int index);

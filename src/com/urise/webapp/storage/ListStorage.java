@@ -23,6 +23,7 @@ public class ListStorage extends AbstractStorage {
         return index != null;
     }
 
+
     @Override
     public void clear() {
         list.clear();
@@ -45,12 +46,12 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public void doDelete(Integer index) {
-        list.remove(index);
+        list.remove(((Integer) index).intValue());
     }
 
     @Override
     public Resume[] getAll() {
-        return new Resume[list.size()];
+        return list.toArray(new Resume[list.size()]);
     }
 
     @Override
