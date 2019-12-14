@@ -8,12 +8,12 @@ public abstract class AbstractStorage implements Storage {
 
     public void update(Resume resume) {
         Integer index = getIndexNotExist(resume.getUuid());
-        doUpdate(resume, index);
+        doUpdate(index, resume);
     }
 
     public void save(Resume resume) {
         Integer index = getIndexExist(resume.getUuid());
-        doSave(resume, index);
+        doSave(index, resume);
     }
 
     public Resume get(String uuid) {
@@ -48,9 +48,9 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract boolean isExist(Integer index);
 
-    protected abstract void doUpdate(Resume resume, Integer searchIndex);
+    protected abstract void doUpdate(Integer searchIndex, Resume resume);
 
-    protected abstract void doSave(Resume resume, Integer searchIndex);
+    protected abstract void doSave(Integer searchIndex, Resume resume);
 
     protected abstract Resume doGet(Integer searchIndex);
 
