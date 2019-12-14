@@ -17,12 +17,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void doUpdate(Resume resume, Integer index) {
+    public void doUpdate(Integer index, Resume resume) {
         storage[index] = resume;
     }
 
     @Override
-    public void doSave(Resume resume, Integer index) {
+    public void doSave(Integer index, Resume resume) {
         if (count >= storage.length) {
             throw new StorageException("Error: The storage is already full", resume.getUuid());
         } else {

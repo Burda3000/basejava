@@ -20,7 +20,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(Integer index) {
-        return index != null;
+        return map.containsKey(index);
     }
 
     @Override
