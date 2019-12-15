@@ -7,27 +7,27 @@ import com.urise.webapp.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     public void update(Resume resume) {
-        Integer index = getIndexNotExist(resume.getUuid());
+        Object index = getIndexNotExist(resume.getUuid());
         doUpdate(index, resume);
     }
 
     public void save(Resume resume) {
-        Integer index = getIndexExist(resume.getUuid());
+        Object index = getIndexExist(resume.getUuid());
         doSave(index, resume);
     }
 
     public Resume get(String uuid) {
-        Integer index = getIndexNotExist(uuid);
+        Object index = getIndexNotExist(uuid);
         return doGet(index);
     }
 
     public void delete(String uuid) {
-        Integer index = getIndexNotExist(uuid);
+        Object index = getIndexNotExist(uuid);
         doDelete(index);
     }
 
-    private Integer getIndexNotExist(String uuid) {
-        Integer searchingIndex = getIndex(uuid);
+    private Object getIndexNotExist(String uuid) {
+        Object searchingIndex = getIndex(uuid);
         if (isExist(searchingIndex)) {
             return searchingIndex;
         } else {
@@ -35,8 +35,8 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    private Integer getIndexExist(String uuid) {
-        Integer searchingIndex = getIndex(uuid);
+    private Object getIndexExist(String uuid) {
+        Object searchingIndex = getIndex(uuid);
         if (!isExist(searchingIndex)) {
             return searchingIndex;
         } else {
@@ -44,15 +44,15 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    protected abstract Integer getIndex(String uuid);
+    protected abstract Object getIndex(String uuid);
 
-    protected abstract boolean isExist(Integer index);
+    protected abstract boolean isExist(Object index);
 
-    protected abstract void doUpdate(Integer searchIndex, Resume resume);
+    protected abstract void doUpdate(Object searchIndex, Resume resume);
 
-    protected abstract void doSave(Integer searchIndex, Resume resume);
+    protected abstract void doSave(Object searchIndex, Resume resume);
 
-    protected abstract Resume doGet(Integer searchIndex);
+    protected abstract Resume doGet(Object searchIndex);
 
-    protected abstract void doDelete(Integer searchIndex);
+    protected abstract void doDelete(Object searchIndex);
 }

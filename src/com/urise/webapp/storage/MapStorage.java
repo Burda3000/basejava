@@ -6,40 +6,41 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapStorage extends AbstractStorage {
-    private Map<Integer, Resume> map = new HashMap<>();
+    private Map<String, Resume> map = new HashMap<>();
 
     @Override
-    protected Integer getIndex(String uuid) {
+    protected Object getIndex(String uuid) {
         for (int i = 0; i < map.size(); i++) {
-            if (map.get(i).getUuid().equals(uuid)) {
-                return i;
+            if (map.containsKey(uuid)) {
+                return uuid;
             }
         }
         return null;
+
     }
 
     @Override
-    protected boolean isExist(Integer index) {
+    protected boolean isExist(Object index) {
         return map.containsKey(index);
     }
 
     @Override
-    protected void doUpdate(Integer searchIndex, Resume resume) {
-        map.put(searchIndex, resume);
+    protected void doUpdate(Object searchIndex, Resume resume) {
+        map.put((String) searchIndex, resume);
     }
 
     @Override
-    protected void doSave(Integer searchIndex, Resume resume) {
-        map.put(searchIndex, resume);
+    protected void doSave(Object searchIndex, Resume resume) {
+        map.put((String) searchIndex, resume);
     }
 
     @Override
-    protected Resume doGet(Integer searchIndex) {
+    protected Resume doGet(Object searchIndex) {
         return map.get(searchIndex);
     }
 
     @Override
-    protected void doDelete(Integer searchIndex) {
+    protected void doDelete(Object searchIndex) {
         map.remove(searchIndex);
     }
 

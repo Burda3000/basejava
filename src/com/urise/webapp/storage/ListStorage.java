@@ -19,7 +19,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public boolean isExist(Integer index) {
+    public boolean isExist(Object index) {
         return index != null;
     }
 
@@ -29,22 +29,22 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void doUpdate(Integer index, Resume resume) {
-        list.set(index, resume);
+    public void doUpdate(Object index, Resume resume) {
+        list.set((Integer) index, resume);
     }
 
     @Override
-    public void doSave(Integer index, Resume resume) {
+    public void doSave(Object index, Resume resume) {
         list.add(resume);
     }
 
     @Override
-    public Resume doGet(Integer index) {
-        return list.get(index);
+    public Resume doGet(Object index) {
+        return list.get((Integer) index);
     }
 
     @Override
-    public void doDelete(Integer index) {
+    public void doDelete(Object index) {
         list.remove(((Integer) index).intValue());
     }
 

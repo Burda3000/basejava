@@ -17,28 +17,28 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void doUpdate(Integer index, Resume resume) {
-        storage[index] = resume;
+    public void doUpdate(Object index, Resume resume) {
+        storage[(int) index] = resume;
     }
 
     @Override
-    public void doSave(Integer index, Resume resume) {
+    public void doSave(Object index, Resume resume) {
         if (count >= storage.length) {
             throw new StorageException("Error: The storage is already full", resume.getUuid());
         } else {
-            insert(index, resume);
+            insert((Integer) index, resume);
             count++;
         }
     }
 
     @Override
-    public Resume doGet(Integer index) {
-        return storage[index];
+    public Resume doGet(Object index) {
+        return storage[(int) index];
     }
 
     @Override
-    public void doDelete(Integer getIndex) {
-        remove(getIndex);
+    public void doDelete(Object getIndex) {
+        remove((Integer) getIndex);
         storage[count - 1] = null;
         count--;
     }
@@ -52,8 +52,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public boolean isExist(Integer index) {
-        return index >= 0;
+    public boolean isExist(Object index) {
+        return (int) index >= 0;
     }
 
     public abstract void remove(int index);
