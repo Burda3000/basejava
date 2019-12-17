@@ -18,7 +18,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public void doUpdate(Object index, Resume resume) {
-        storage[(int) index] = resume;
+        storage[(Integer) index] = resume;
     }
 
     @Override
@@ -33,7 +33,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public Resume doGet(Object index) {
-        return storage[(int) index];
+        return storage[(Integer) index];
     }
 
     @Override
@@ -53,12 +53,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public boolean isExist(Object index) {
-        return (int) index >= 0;
+        return (Integer) index >= 0;
     }
 
     public abstract void remove(int index);
 
     public abstract void insert(int index, Resume resume);
 
-    public abstract Integer getIndex(String uuid);
+    public abstract Integer getSearchKey(String uuid);
 }
