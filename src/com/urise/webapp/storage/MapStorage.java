@@ -10,11 +10,6 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected String getSearchKey(String uuid) {
-        for (int i = 0; i < map.size(); i++) {
-            if (map.containsKey(uuid)) {
-                return uuid;
-            }
-        }
         return uuid;
     }
 
