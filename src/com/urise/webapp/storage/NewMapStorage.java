@@ -11,37 +11,37 @@ public class NewMapStorage extends AbstractStorage {
 
     @Override
     protected Object getSearchKey(String uuid) {
-        return null;
+        return newMap.get(uuid);
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return false;
+        return newMap.containsKey((String) searchKey);
     }
 
     @Override
     protected void doUpdate(Object searchKey, Resume resume) {
-
+        newMap.put((String) searchKey, resume);
     }
 
     @Override
     protected void doSave(Object searchKey, Resume resume) {
-
+        newMap.put((String) searchKey, resume);
     }
 
     @Override
     protected Resume doGet(Object searchKey) {
-        return null;
+        return newMap.get((String) searchKey);
     }
 
     @Override
     protected void doDelete(Object searchKey) {
-
+        newMap.remove((String) searchKey);
     }
 
     @Override
     public void clear() {
-
+        newMap.clear();
     }
 
     @Override
@@ -51,6 +51,6 @@ public class NewMapStorage extends AbstractStorage {
 
     @Override
     public int size() {
-        return 0;
+        return newMap.size();
     }
 }
