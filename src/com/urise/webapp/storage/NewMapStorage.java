@@ -3,10 +3,11 @@ package com.urise.webapp.storage;
 import com.urise.webapp.model.Resume;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class MapUuidStorage extends AbstractStorage {
-    private Map<String, Resume> map = new HashMap<>();
+public class NewMapStorage extends AbstractStorage {
+    private Map<String, Resume> newMap = new HashMap<>();
 
     @Override
     protected Object getSearchKey(String uuid) {
@@ -44,8 +45,8 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return new Resume[0];
+    public List<Resume> getAllSorted() {
+        return (List<Resume>) newMap.values();
     }
 
     @Override

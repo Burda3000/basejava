@@ -10,9 +10,9 @@ public class MainTestArrayStorage {
     private static final MapStorage ARRAY_STORAGE = new MapStorage();
 
     public static void main(String[] args) {
-        final Resume r1 = new Resume("uui1");
-        final Resume r2 = new Resume("uui2");
-        final Resume r3 = new Resume("uui3");
+        final Resume r1 = new Resume("uui1", "fullName_1");
+        final Resume r2 = new Resume("uui2", "fullName_2");
+        final Resume r3 = new Resume("uui3", "fullName_3");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
