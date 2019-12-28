@@ -44,7 +44,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         count--;
     }
 
-    public List<Resume> getAllSorted() {
+    public List<Resume> getAllCopy() {
         return Arrays.asList(Arrays.copyOf(storage, count));
     }
 
