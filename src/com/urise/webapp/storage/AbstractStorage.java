@@ -29,6 +29,12 @@ public abstract class AbstractStorage implements Storage {
         doDelete(searchKey);
     }
 
+    public List<Resume> getAllSorted() {
+        List<Resume> list = getAllCopy();
+        Collections.sort(list);
+        return list;
+    }
+
     private Object getIndexNotExist(String uuid) {
         Object searchKey = getSearchKey(uuid);
         if (isExist(searchKey)) {
@@ -47,13 +53,7 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    public List<Resume> getAllSorted() {
-        List<Resume> list = getAllCopy();
-        Collections.sort(list);
-        return list;
-    }
-
-    public abstract List<Resume> getAllCopy();
+    protected abstract List<Resume> getAllCopy();
 
     protected abstract Object getSearchKey(String uuid);
 

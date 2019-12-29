@@ -69,7 +69,7 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAll() throws Exception {
+    public void getAllSorted() throws Exception {
         List<Resume> resumes = storage.getAllSorted();
         Assert.assertEquals(3, resumes.size());
         Assert.assertEquals(resume_1, resumes.get(0));

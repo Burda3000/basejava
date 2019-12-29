@@ -17,27 +17,27 @@ public class ResumeMapStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(Object resume) {
-        return newMap.containsKey((String) resume);
+        return resume != null;
     }
 
     @Override
     protected void doUpdate(Object r, Resume resume) {
-        newMap.put((String) r, resume);
+        newMap.put(resume.getUuid(), resume);
     }
 
     @Override
     protected void doSave(Object r, Resume resume) {
-        newMap.put((String) r, resume);
+        newMap.put(resume.getUuid(), resume);
     }
 
     @Override
     protected Resume doGet(Object resume) {
-        return newMap.get((String) resume);
+        return (Resume) resume;
     }
 
     @Override
     protected void doDelete(Object resume) {
-        newMap.remove((String) resume);
+        newMap.remove((((Resume) resume)).getUuid());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ResumeMapStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAllCopy() {
+    protected List<Resume> getAllCopy() {
         return new ArrayList<>(newMap.values());
     }
 
