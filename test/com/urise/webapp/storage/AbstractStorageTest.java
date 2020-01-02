@@ -17,21 +17,21 @@ public abstract class AbstractStorageTest {
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
 
-    private static final Resume resume_1;
-    private static final Resume resume_2;
-    private static final Resume resume_3;
-    private static final Resume resume_4;
+    private static final Resume RESUME_1;
+    private static final Resume RESUME_2;
+    private static final Resume RESUME_3;
+    private static final Resume RESUME_4;
 
-    private static final String fullName_1 = "fullName_1";
-    private static final String fullName_2 = "fullName_2";
-    private static final String fullName_3 = "fullName_3";
-    private static final String fullName_4 = "fullName_3";
+    private static final String FULL_NAME_1 = "fullName_1";
+    private static final String FULL_NAME_2 = "fullName_2";
+    private static final String FULL_NAME_3 = "fullName_3";
+    private static final String FULL_NAME_4 = "fullName_3";
 
     static {
-        resume_1 = new Resume(UUID_1, fullName_1);
-        resume_2 = new Resume(UUID_2, fullName_2);
-        resume_3 = new Resume(UUID_3, fullName_3);
-        resume_4 = new Resume(UUID_4, fullName_4);
+        RESUME_1 = new Resume(UUID_1, FULL_NAME_1);
+        RESUME_2 = new Resume(UUID_2, FULL_NAME_2);
+        RESUME_3 = new Resume(UUID_3, FULL_NAME_3);
+        RESUME_4 = new Resume(UUID_4, FULL_NAME_4);
     }
 
     AbstractStorageTest(Storage storage) {
@@ -41,9 +41,9 @@ public abstract class AbstractStorageTest {
     @Before
     public void setUp() throws Exception {
         storage.clear();
-        storage.save(resume_1);
-        storage.save(resume_2);
-        storage.save(resume_3);
+        storage.save(RESUME_1);
+        storage.save(RESUME_2);
+        storage.save(RESUME_3);
     }
 
     @Test
@@ -59,8 +59,8 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() throws Exception {
-        storage.update(resume_1);
-        Assert.assertSame(resume_1, storage.get(UUID_1));
+        storage.update(RESUME_1);
+        Assert.assertSame(RESUME_1, storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -72,21 +72,21 @@ public abstract class AbstractStorageTest {
     public void getAllSorted() throws Exception {
         List<Resume> resumes = storage.getAllSorted();
         Assert.assertEquals(3, resumes.size());
-        Assert.assertEquals(resume_1, resumes.get(0));
-        Assert.assertEquals(resume_2, resumes.get(1));
-        Assert.assertEquals(resume_3, resumes.get(2));
+        Assert.assertEquals(RESUME_1, resumes.get(0));
+        Assert.assertEquals(RESUME_2, resumes.get(1));
+        Assert.assertEquals(RESUME_3, resumes.get(2));
     }
 
     @Test
     public void save() throws Exception {
-        storage.save(resume_4);
+        storage.save(RESUME_4);
         Assert.assertEquals(4, storage.size());
         storage.get(UUID_4);
     }
 
     @Test(expected = ExistStorageException.class)
     public void saveAlreadyExist() throws Exception {
-        storage.save(resume_1);
+        storage.save(RESUME_1);
     }
 
     // тут был код
@@ -105,9 +105,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void get() throws Exception {
-        Assert.assertEquals(resume_1, storage.get(UUID_1));
-        Assert.assertEquals(resume_2, storage.get(UUID_2));
-        Assert.assertEquals(resume_3, storage.get(UUID_3));
+        Assert.assertEquals(RESUME_1, storage.get(UUID_1));
+        Assert.assertEquals(RESUME_2, storage.get(UUID_2));
+        Assert.assertEquals(RESUME_3, storage.get(UUID_3));
     }
 
     @Test(expected = NotExistStorageException.class)
