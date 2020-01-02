@@ -6,7 +6,7 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     static final int STORAGE_LIMIT = 10_000;
 
     Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -18,12 +18,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Object index, Resume resume) {
+    protected void doUpdate(Integer index, Resume resume) {
         storage[(Integer) index] = resume;
     }
 
     @Override
-    protected void doSave(Object index, Resume resume) {
+    protected void doSave(Integer index, Resume resume) {
         if (count >= storage.length) {
             throw new StorageException("Error: The storage is already full", resume.getUuid());
         } else {
@@ -33,13 +33,13 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume doGet(Object index) {
-        return storage[(Integer) index];
+    protected Resume doGet(Integer index) {
+        return storage[index];
     }
 
     @Override
-    protected void doDelete(Object getIndex) {
-        remove((Integer) getIndex);
+    protected void doDelete(Integer getIndex) {
+        remove(getIndex);
         storage[count - 1] = null;
         count--;
     }
@@ -53,8 +53,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object index) {
-        return (Integer) index >= 0;
+    protected boolean isExist(Integer index) {
+        return  index >= 0;
     }
 
     protected abstract void remove(int index);
