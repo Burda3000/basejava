@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class TextSection extends Section {
-    private final List<Section> textContent;
+    private final List<String> textContent;
 
-    public TextSection(List<Section> textContent) {
+    TextSection(List<String> textContent) {
         Objects.requireNonNull(textContent, "textContent must not be null");
         this.textContent = textContent;
     }
 
-    public List<Section> getTextContent() {
+    public List<String> getTextContent() {
         return textContent;
     }
 

@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class OrganizationSection extends Section{
-    private final List<Organisation> organisations;
+    private final List<String> organisations;
 
-    public OrganizationSection(List<Organisation> organisations) {
+    OrganizationSection(List<String> organisations) {
         Objects.requireNonNull(organisations, "organisations must not be null");
         this.organisations = organisations;
     }
 
-    public List<Organisation> getOrganisations() {
+    public List<String> getOrganisations() {
         return organisations;
     }
 

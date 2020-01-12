@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommonInfoSection extends Section {
-    private final List<Section> sections;
+    private final List<String> sections;
 
-    public CommonInfoSection(List<Section> sections) {
+    CommonInfoSection(List<String> sections) {
         Objects.requireNonNull(sections, "sections must not be null");
         this.sections = sections;
     }
 
-    public List<Section> getSections() {
+    public List<String> getSections() {
         return sections;
     }
 

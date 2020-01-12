@@ -11,11 +11,11 @@ public class Organisation {
     private final String nameOfPosition;
     private final String description;
 
-    public Organisation(LocalDate startDate, LocalDate finishDate, String nameOfOrganisation, String link, String nameOfPosition, String description) {
+    Organisation(LocalDate startDate, LocalDate finishDate,
+                 String nameOfOrganisation, String link, String nameOfPosition, String description) {
         Objects.requireNonNull(startDate, "startDate must not be null");
         Objects.requireNonNull(finishDate, "finishDate must not be null");
         Objects.requireNonNull(nameOfOrganisation, "nameOfOrganisation must not be null");
-        Objects.requireNonNull(link, "link must not be null");
         Objects.requireNonNull(nameOfPosition, "nameOfPosition must not be null");
         Objects.requireNonNull(description, "description must not be null");
         this.startDate = startDate;
