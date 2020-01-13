@@ -3,15 +3,15 @@ package com.urise.webapp.model;
 import java.util.List;
 import java.util.Objects;
 
-public class OrganizationSection extends Section{
-    private final List<String> organisations;
+public class OrganizationSection extends Section {
+    private final List<Organisation> organisations;
 
-    OrganizationSection(List<String> organisations) {
+    OrganizationSection(List<Organisation> organisations) {
         Objects.requireNonNull(organisations, "organisations must not be null");
         this.organisations = organisations;
     }
 
-    public List<String> getOrganisations() {
+    public List<Organisation> getOrganisations() {
         return organisations;
     }
 
