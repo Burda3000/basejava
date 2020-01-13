@@ -1,18 +1,17 @@
 package com.urise.webapp.model;
 
-import java.util.List;
 import java.util.Objects;
 
 public class TextSection extends Section {
-    private final List<String> textContent;
+    private final String sections;
 
-    TextSection(List<String> textContent) {
-        Objects.requireNonNull(textContent, "textContent must not be null");
-        this.textContent = textContent;
+    public TextSection(String sections) {
+        Objects.requireNonNull(sections, "sections must not be null");
+        this.sections = sections;
     }
 
-    public List<String> getTextContent() {
-        return textContent;
+    public String getSections() {
+        return sections;
     }
 
     @Override
@@ -22,18 +21,18 @@ public class TextSection extends Section {
 
         TextSection that = (TextSection) o;
 
-        return textContent.equals(that.textContent);
+        return sections.equals(that.sections);
     }
 
     @Override
     public int hashCode() {
-        return textContent.hashCode();
+        return sections.hashCode();
     }
 
     @Override
     public String toString() {
         return "TextSection{" +
-                "textContent=" + textContent +
+                "sections=" + sections +
                 '}';
     }
 }

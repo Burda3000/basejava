@@ -11,13 +11,12 @@ public class Organisation {
     private final String nameOfPosition;
     private final String description;
 
-    Organisation(LocalDate startDate, LocalDate finishDate,
-                 String nameOfOrganisation, String link, String nameOfPosition, String description) {
+    public Organisation(LocalDate startDate, LocalDate finishDate,
+                        String nameOfOrganisation, String link, String nameOfPosition, String description) {
         Objects.requireNonNull(startDate, "startDate must not be null");
         Objects.requireNonNull(finishDate, "finishDate must not be null");
         Objects.requireNonNull(nameOfOrganisation, "nameOfOrganisation must not be null");
         Objects.requireNonNull(nameOfPosition, "nameOfPosition must not be null");
-        Objects.requireNonNull(description, "description must not be null");
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.nameOfOrganisation = nameOfOrganisation;
@@ -45,13 +44,7 @@ public class Organisation {
 
     @Override
     public int hashCode() {
-        int result = startDate != null ? startDate.hashCode() : 0;
-        result = 31 * result + (finishDate != null ? finishDate.hashCode() : 0);
-        result = 31 * result + (nameOfOrganisation != null ? nameOfOrganisation.hashCode() : 0);
-        result = 31 * result + (link != null ? link.hashCode() : 0);
-        result = 31 * result + (nameOfPosition != null ? nameOfPosition.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        return Objects.hash(startDate, finishDate, nameOfOrganisation, link, nameOfPosition, description);
     }
 
     @Override
