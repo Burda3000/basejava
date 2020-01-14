@@ -31,6 +31,26 @@ public class Resume implements Comparable<Resume> {
         return uuid;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Map<SectionType, Section> getSections() {
+        return sections;
+    }
+
+//    public Section getSections(SectionType type) {
+//        return sections.get(type);
+//    }
+
+    public Map<ContactType, String> getContacts() {
+        return contacts;
+    }
+
+//    public String getContacts(ContactType type) {
+//        return contacts.get(type);
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,18 +79,6 @@ public class Resume implements Comparable<Resume> {
             return resultUuid;
         }
         return resultFullName;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public Map<SectionType, Section> getSections() {
-        return sections;
-    }
-
-    public Map<ContactType, String> getContacts() {
-        return contacts;
     }
 }
 

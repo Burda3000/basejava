@@ -7,12 +7,12 @@ public class Organisation {
     private final LocalDate startDate;
     private final LocalDate finishDate;
     private final String nameOfOrganisation;
-    private final String link;
+    private final Link link;
     private final String nameOfPosition;
     private final String description;
 
-    public Organisation(LocalDate startDate, LocalDate finishDate,
-                        String nameOfOrganisation, String link, String nameOfPosition, String description) {
+    public Organisation(LocalDate startDate, LocalDate finishDate, String nameOfOrganisation, String name,
+                        String link, String nameOfPosition, String description) {
         Objects.requireNonNull(startDate, "startDate must not be null");
         Objects.requireNonNull(finishDate, "finishDate must not be null");
         Objects.requireNonNull(nameOfOrganisation, "nameOfOrganisation must not be null");
@@ -20,7 +20,7 @@ public class Organisation {
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.nameOfOrganisation = nameOfOrganisation;
-        this.link = link;
+        this.link = new Link(name, link);
         this.nameOfPosition = nameOfPosition;
         this.description = description;
     }
@@ -32,19 +32,17 @@ public class Organisation {
 
         Organisation that = (Organisation) o;
 
-        if (!Objects.equals(startDate, that.startDate)) return false;
-        if (!Objects.equals(finishDate, that.finishDate)) return false;
-        if (!Objects.equals(nameOfOrganisation, that.nameOfOrganisation))
-            return false;
+        if (!startDate.equals(that.startDate)) return false;
+        if (!finishDate.equals(that.finishDate)) return false;
+        if (!nameOfOrganisation.equals(that.nameOfOrganisation)) return false;
         if (!Objects.equals(link, that.link)) return false;
-        if (!Objects.equals(nameOfPosition, that.nameOfPosition))
-            return false;
+        if (!nameOfPosition.equals(that.nameOfPosition)) return false;
         return Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(startDate, finishDate, nameOfOrganisation, link, nameOfPosition, description);
+        return Objects.hash(startDate, finishDate, nameOfOrganisation, link, nameOfPosition);
     }
 
     @Override
