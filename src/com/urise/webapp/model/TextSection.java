@@ -31,8 +31,6 @@ public class TextSection extends Section {
 
     @Override
     public String toString() {
-        return "TextSection{" +
-                "sections=" + sections +
-                '}';
+        return "TextSection{" + "," + sections + '}';
     }
 }
