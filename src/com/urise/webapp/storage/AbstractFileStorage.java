@@ -26,7 +26,11 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected List<Resume> getAllCopy() {
         File[] files = directory.listFiles();
-        List<Resume> lists = new ArrayList<>(Objects.requireNonNull(files).length);
+        if (files == null) {
+            throw new StorageException("error: Files are null", null);
+        }
+
+        List<Resume> lists = new ArrayList<>(files.length);
         for (File file : files) {
             lists.add(doGet(file));
         }
@@ -56,7 +60,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected void doSave(File file, Resume resume) {
         try {
             file.createNewFile();
-            doWrite(resume, file);
+            doUpdate(file, resume);
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -71,14 +75,16 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         try {
             return doRead(file);
         } catch (IOException e) {
-            throw new StorageException("IO error", file.getName(), e);
+            throw new StorageException("Reading error", file.getName(), e);
         }
     }
 
     @Override
     protected void doDelete(File file) {
         boolean deleted = directory.delete();
-        if (deleted) System.out.println("Directory has been deleted");
+        if (!deleted) {
+            throw new StorageException("File has not been deleted", file.getName());
+        }
     }
 
     @Override
@@ -93,6 +99,6 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        return Math.toIntExact(directory.length());
+        return (int) (directory.length());
     }
 }

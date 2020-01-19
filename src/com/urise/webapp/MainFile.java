@@ -28,5 +28,32 @@ public class MainFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        System.out.println("--------------------------------------------------");
+
+        //todo Сделать рекурсивный обход и вывод имени файлов в каталогах и подкаталогах (корневой каталог- ваш проект)
+        File mainDir = new File("C:\\Users\\Ashcr\\Desktop\\TopJava\\basejava\\src\\com\\urise\\webapp");
+        System.out.println("по указанному пути располагается каталог: " + mainDir.isDirectory());
+        File[] files = mainDir.listFiles();
+
+        if (files != null) {
+            for (File name : files) {
+                if (name.isDirectory()) {
+                    System.out.println("The name of the catalog is " + name.getName());
+                    getFiles(name);
+                }
+            }
+        }
+    }
+
+    private static void getFiles(File searchDir) {
+        File[] file = searchDir.listFiles();
+        if (file != null) {
+            for (File name : file) {
+                if (name.isFile()) {
+                    System.out.println("The file's name is " + name.getName());
+                }
+            }
+        }
     }
 }

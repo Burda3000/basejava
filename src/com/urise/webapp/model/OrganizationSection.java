@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,10 @@ public class OrganizationSection extends Section {
     public OrganizationSection(List<Organisation> organisations) {
         Objects.requireNonNull(organisations, "organisations must not be null");
         this.organisations = organisations;
+    }
+
+    public OrganizationSection(Organisation organizations) {
+        this(Collections.<Organisation>singletonList(organizations));
     }
 
     public List<Organisation> getOrganisations() {
