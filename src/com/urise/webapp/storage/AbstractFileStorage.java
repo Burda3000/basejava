@@ -99,6 +99,10 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
+        File[] files = directory.listFiles();
+        if (files == null) {
+            throw new StorageException("error: Files are null", null);
+        }
         return (int) (directory.length());
     }
 }
