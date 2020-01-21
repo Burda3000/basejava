@@ -1,24 +1,21 @@
 package com.urise.webapp.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Organisation {
     private final Link link;
-    private List<Positions> positions = new ArrayList<>();
+    private List<Position> position = new ArrayList<>();
 
-    public Organisation(String name, String link, List<Positions> positions) {
-        this.link = new Link(name, link);
-        this.positions = positions;
+    public Organisation(String name, String url, List<Position> position) {
+        this(new Link(name, url), position);
     }
 
-    public Organisation(String name, String link, Positions positions) {
-        this.link = new Link(name, link);
-        this.positions = Collections.singletonList(positions);
+    public Organisation(Link link, List<Position> positions ) {
+        this.link = link;
+        this.position = positions;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -28,12 +25,12 @@ public class Organisation {
         Organisation that = (Organisation) o;
 
         if (!link.equals(that.link)) return false;
-        return positions.equals(that.positions);
+        return position.equals(that.position);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(link, positions);
+        return Objects.hash(link, position);
     }
 
     @Override
@@ -41,13 +38,13 @@ public class Organisation {
         return "Organisation{" + link + '}';
     }
 
-    public static class Positions {
+    public static class Position {
         private final LocalDate startDate;
         private final LocalDate finishDate;
         private final String title;
         private final String description;
 
-        public Positions(LocalDate startDate, LocalDate finishDate, String title, String description) {
+        public Position(LocalDate startDate, LocalDate finishDate, String title, String description) {
             Objects.requireNonNull(startDate, "startDate must not be null");
             Objects.requireNonNull(finishDate, "finishDate must not be null");
             Objects.requireNonNull(title, "nameOfPosition must not be null");
@@ -63,7 +60,7 @@ public class Organisation {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            Positions positions = (Positions) o;
+            Position positions = (Position) o;
 
             if (!startDate.equals(positions.startDate)) return false;
             if (!finishDate.equals(positions.finishDate)) return false;

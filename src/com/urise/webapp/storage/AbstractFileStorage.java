@@ -103,6 +103,6 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         if (files == null) {
             throw new StorageException("error: Files are null", null);
         }
-        return (int) (directory.length());
+        return files.length;
     }
 }

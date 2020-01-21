@@ -41,7 +41,6 @@ public class MainFile {
                 if (name.isFile()) {
                     System.out.println("The file's name is " + name.getName());
                 } else if (name.isDirectory()) {
-                    System.out.println("The directory's name is: " + name.getName());
                     getFiles(name);
                 }
             }
