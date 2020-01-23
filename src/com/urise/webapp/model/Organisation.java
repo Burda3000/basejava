@@ -1,21 +1,23 @@
 package com.urise.webapp.model;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class Organisation {
-    private final Link link;
+    private final Link homePage;
     private List<Position> position = new ArrayList<>();
 
-    public Organisation(String name, String url, List<Position> position) {
-        this(new Link(name, url), position);
+    public Organisation(String name, String url, Position position) {
+        this(new Link(name, url), Collections.singletonList((position)));
     }
 
-    public Organisation(Link link, List<Position> positions ) {
-        this.link = link;
-        this.position = positions;
+    public Organisation(Link link, List<Position> position) {
+        this.homePage = link;
+        this.position = position;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -24,18 +26,18 @@ public class Organisation {
 
         Organisation that = (Organisation) o;
 
-        if (!link.equals(that.link)) return false;
+        if (!homePage.equals(that.homePage)) return false;
         return position.equals(that.position);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(link, position);
+        return Objects.hash(homePage, position);
     }
 
     @Override
     public String toString() {
-        return "Organisation{" + link + '}';
+        return "Organisation{" + homePage + '}';
     }
 
     public static class Position {

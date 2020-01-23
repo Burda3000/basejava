@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class ListSection extends Section {
-    private final List<String> textContent;
+    private final List<String> items;
 
     public ListSection(List<String> textContent) {
         Objects.requireNonNull(textContent, "textContent must not be null");
-        this.textContent = textContent;
+        this.items = textContent;
     }
 
-    public List<String> getTextContent() {
-        return textContent;
+    public List<String> getItems() {
+        return items;
     }
 
     @Override
@@ -22,16 +22,16 @@ public class ListSection extends Section {
 
         ListSection that = (ListSection) o;
 
-        return textContent.equals(that.textContent);
+        return items.equals(that.items);
     }
 
     @Override
     public int hashCode() {
-        return textContent.hashCode();
+        return items.hashCode();
     }
 
     @Override
     public String toString() {
-        return "ListSection: " + textContent;
+        return items.toString();
     }
 }

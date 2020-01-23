@@ -26,9 +26,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected List<Resume> getAllCopy() {
         File[] files = directory.listFiles();
-        if (files == null) {
-            throw new StorageException("error: Files are null", null);
-        }
+        getNullExceptionFiles(files);
 
         List<Resume> lists = new ArrayList<>(files.length);
         for (File file : files) {
@@ -90,19 +88,22 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     public void clear() {
         File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                doDelete(file);
-            }
+        getNullExceptionFiles(files);
+        for (File file : files) {
+            doDelete(file);
         }
     }
 
     @Override
     public int size() {
         File[] files = directory.listFiles();
+        getNullExceptionFiles(files);
+        return files.length;
+    }
+
+    private void getNullExceptionFiles(File[] files) {
         if (files == null) {
             throw new StorageException("error: Files are null", null);
         }
-        return files.length;
     }
 }

@@ -3,15 +3,15 @@ package com.urise.webapp.model;
 import java.util.Objects;
 
 public class TextSection extends Section {
-    private final String sections;
+    private final String content;
 
-    public TextSection(String sections) {
-        Objects.requireNonNull(sections, "sections must not be null");
-        this.sections = sections;
+    public TextSection(String content) {
+        Objects.requireNonNull(content, "sections must not be null");
+        this.content = content;
     }
 
-    public String getSections() {
-        return sections;
+    public String getContent() {
+        return content;
     }
 
     @Override
@@ -21,16 +21,16 @@ public class TextSection extends Section {
 
         TextSection that = (TextSection) o;
 
-        return sections.equals(that.sections);
+        return content.equals(that.content);
     }
 
     @Override
     public int hashCode() {
-        return sections.hashCode();
+        return content.hashCode();
     }
 
     @Override
     public String toString() {
-        return "TextSection: " + sections ;
+        return content;
     }
 }
