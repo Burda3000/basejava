@@ -1,17 +1,14 @@
 package com.urise.webapp.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Organisation {
     private final Link homePage;
     private List<Position> position = new ArrayList<>();
 
-    public Organisation(String name, String url, Position position) {
-        this(new Link(name, url), Collections.singletonList((position)));
+    public Organisation(String name, String url, Position... position) {
+        this(new Link(name, url), Arrays.asList((position)));
     }
 
     public Organisation(Link link, List<Position> position) {

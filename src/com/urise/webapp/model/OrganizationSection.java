@@ -1,14 +1,14 @@
 package com.urise.webapp.model;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class OrganizationSection extends Section {
     private final List<Organisation> organisations;
 
-    public OrganizationSection(Organisation organisation) {
-        this(Collections.singletonList(organisation));
+    public OrganizationSection(Organisation... organisation) {
+        this(Arrays.asList(organisation));
     }
 
     public OrganizationSection(List<Organisation> organisations) {

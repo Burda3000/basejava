@@ -32,6 +32,10 @@ public abstract class AbstractStorageTest {
         RESUME_2 = new Resume(UUID_2, FULL_NAME_2);
         RESUME_3 = new Resume(UUID_3, FULL_NAME_3);
         RESUME_4 = new Resume(UUID_4, FULL_NAME_4);
+
+        ResumeTestData.setUniqueId(RESUME_1, UUID_1, FULL_NAME_1);
+        ResumeTestData.setContact(RESUME_1);
+        ResumeTestData.setSection(RESUME_1);
     }
 
     AbstractStorageTest(Storage storage) {

@@ -7,25 +7,26 @@ import java.time.Month;
 import java.util.Collections;
 
 public class ResumeTestData {
+
     public static void main(String[] args) {
-        Resume resume = new Resume("Георгий Кислин");
-        resume.addContacts(ContactType.PHONE, "+7(921) 855-0482");
-        resume.addContacts(ContactType.SKYPE, "grigory.kislin");
-        resume.addContacts(ContactType.EMAIL, "gkislin@yandex.ru");
-        resume.addContacts(ContactType.PROFILE_LINKEDIN, "Профиль LinkedIn");
-        resume.addContacts(ContactType.PROFILE_GITNUB, "Профиль GitHub");
-        resume.addContacts(ContactType.PROFILE_STACKOVERFLOW, "Профиль Stackoverflow");
-        resume.addContacts(ContactType.HOME_PAGE, "Домашняя страница");
-        resume.addSections(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
-        resume.addSections(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры. "));
-        resume.addSections(SectionType.ACHIEVEMENT, new ListSection(Collections.singletonList("\n" +
+        Resume gKislinResume = new Resume("Георгий Кислин");
+        gKislinResume.addContacts(ContactType.PHONE, "+7(921) 855-0482");
+        gKislinResume.addContacts(ContactType.SKYPE, "grigory.kislin");
+        gKislinResume.addContacts(ContactType.EMAIL, "gkislin@yandex.ru");
+        gKislinResume.addContacts(ContactType.PROFILE_LINKEDIN, "Профиль LinkedIn");
+        gKislinResume.addContacts(ContactType.PROFILE_GITNUB, "Профиль GitHub");
+        gKislinResume.addContacts(ContactType.PROFILE_STACKOVERFLOW, "Профиль Stackoverflow");
+        gKislinResume.addContacts(ContactType.HOME_PAGE, "Домашняя страница");
+        gKislinResume.addSections(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
+        gKislinResume.addSections(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры. "));
+        gKislinResume.addSections(SectionType.ACHIEVEMENT, new ListSection(Collections.singletonList("\n" +
                 "С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". Организация онлайн стажировок и ведение проектов. Более 1000 выпускников.\n" +
                 "Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.\n" +
                 "Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM. Интеграция с 1С, Bonita BPM, CMIS, LDAP. Разработка приложения управления окружением на стеке: Scala/Play/Anorm/JQuery. Разработка SSO аутентификации и авторизации различных ERP модулей, интеграция CIFS/SMB java сервера.\n" +
                 "Реализация c нуля Rich Internet Application приложения на стеке технологий JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Commet, HTML5, Highstock для алгоритмического трейдинга.\n" +
                 "Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов (SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга системы по JMX (Jython/ Django).\n" +
                 "Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.\n")));
-        resume.addSections(SectionType.QUALIFICATIONS, new ListSection(Collections.singletonList("\n" +
+        gKislinResume.addSections(SectionType.QUALIFICATIONS, new ListSection(Collections.singletonList("\n" +
                 "JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2\n" +
                 "Version control: Subversion, Git, Mercury, ClearCase, Perforce\n" +
                 "DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle,\n" +
@@ -41,7 +42,7 @@ public class ResumeTestData {
                 "администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, Nagios, iReport, OpenCmis, Bonita, pgBouncer.\n" +
                 "Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, архитектурных шаблонов, UML, функционального программирования\n" +
                 "Родной русский, английский \"upper intermediate\"\n")));
-        resume.addSections(SectionType.EXPERIENCE, new OrganizationSection(
+        gKislinResume.addSections(SectionType.EXPERIENCE, new OrganizationSection(
                 new Organisation("Java Online Projects", "www.javaops.ru",
                         new Organisation.Position(LocalDate.of(2013, Month.OCTOBER, 1), LocalDate.of(2020, Month.JANUARY, 14), "Автор проекта", "Создание, организация и проведение Java онлайн проектов и стажировок")),
                 new Organisation("Wrike", "www.Wrike.ru",
@@ -58,8 +59,7 @@ public class ResumeTestData {
                         new Organisation.Position(LocalDate.of(2005, Month.JANUARY, 1), LocalDate.of(2007, Month.FEBRUARY, 1), "Разработчик ПО", "Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix).")),
                 new Organisation("Alcatel", "www.Alcatel.ru",
                         new Organisation.Position(LocalDate.of(1997, Month.SEPTEMBER, 1), LocalDate.of(2005, Month.JANUARY, 1), "Инженер по аппаратному и программному тестированию", "Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM)."))));
-
-        resume.addSections(SectionType.EDUCATION, new OrganizationSection(
+        gKislinResume.addSections(SectionType.EDUCATION, new OrganizationSection(
                 new Organisation("Coursera", "www.Coursera.org",
                         new Organisation.Position(LocalDate.of(2013, Month.MARCH, 1), LocalDate.of(2013, Month.MAY, 1), "null", "Functional Programming Principles in Scala by Martin Odersky")),
                 new Organisation("Luxoft", "www.Luxoft.org",
@@ -73,5 +73,39 @@ public class ResumeTestData {
                         new Organisation.Position(LocalDate.of(1987, Month.SEPTEMBER, 1), LocalDate.of(1993, Month.JULY, 1), "null", "Инженер (программист Fortran, C)")),
                 new Organisation("Заочная физико-техническая школа при МФТИ", "www.school.mipt.ru",
                         new Organisation.Position(LocalDate.of(1984, Month.SEPTEMBER, 1), LocalDate.of(1987, Month.JUNE, 1), "null", "Закончил с отличием"))));
+    }
+
+    public void checkData(Resume gKislinResume) {
+        System.out.println("Uuid is " + gKislinResume.getUuid());
+        System.out.println("Full name is " + gKislinResume.getFullName());
+        for (String contacts : gKislinResume.getContacts().values()) {
+            System.out.println(contacts);
+        }
+        System.out.println("---------");
+        for (Section sections : gKislinResume.getSections().values()) {
+            System.out.println(sections);
+        }
+    }
+
+    public static void setUniqueId(Resume resume, String uuid, String fullName){
+        resume.setUuid(uuid);
+        resume.setFullName(fullName);
+    }
+
+    public static void setContact(Resume resume) {
+            resume.addContacts(ContactType.PHONE, "8(111)111-11-11");
+            resume.addContacts(ContactType.SKYPE, "skype");
+    }
+
+    public static void setSection(Resume resume){
+        resume.addSections(SectionType.OBJECTIVE, new TextSection("Objective"));
+        resume.addSections(SectionType.EXPERIENCE, new OrganizationSection(
+                new Organisation("Java Online Projects", "www.javaops.ru",
+                        new Organisation.Position(LocalDate.of(2013, Month.OCTOBER, 1), LocalDate.of(2020, Month.JANUARY, 14), "Автор проекта", "Создание, организация и проведение Java онлайн проектов и стажировок")),
+                new Organisation("Wrike", "www.Wrike.ru",
+                        new Organisation.Position(LocalDate.of(2014, Month.OCTOBER, 1), LocalDate.of(2016, Month.JANUARY, 1), "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO."))));
+        resume.addSections(SectionType.EDUCATION, new OrganizationSection(new Organisation("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", "www.ifmo.ru",
+                new Organisation.Position(LocalDate.of(1993, Month.SEPTEMBER, 1), LocalDate.of(1996, Month.JULY, 1), "null", " Аспирантура (программист С, С++)"),
+                new Organisation.Position(LocalDate.of(1987, Month.SEPTEMBER, 1), LocalDate.of(1993, Month.JULY, 1), "null", "Инженер (программист Fortran, C)"))));
     }
 }
