@@ -1,7 +1,10 @@
 package com.urise.webapp.model;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class Organisation {
     private final Link homePage;
@@ -34,7 +37,7 @@ public class Organisation {
 
     @Override
     public String toString() {
-        return "Organisation{" + homePage + '}';
+        return String.valueOf(homePage);
     }
 
     public static class Position {
@@ -47,7 +50,6 @@ public class Organisation {
             Objects.requireNonNull(startDate, "startDate must not be null");
             Objects.requireNonNull(finishDate, "finishDate must not be null");
             Objects.requireNonNull(title, "nameOfPosition must not be null");
-            Objects.requireNonNull(description, "description must not be null");
             this.startDate = startDate;
             this.finishDate = finishDate;
             this.title = title;
