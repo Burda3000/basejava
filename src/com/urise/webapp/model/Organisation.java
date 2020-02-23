@@ -1,12 +1,17 @@
 package com.urise.webapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Organisation {
+import static com.urise.webapp.utill.DateUtill.of;
+
+public class Organisation implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final Link homePage;
     private List<Position> position = new ArrayList<>();
 
@@ -14,8 +19,8 @@ public class Organisation {
         this(new Link(name, url), Arrays.asList((position)));
     }
 
-    public Organisation(Link link, List<Position> position) {
-        this.homePage = link;
+    public Organisation(Link homePage, List<Position> position) {
+        this.homePage = homePage;
         this.position = position;
     }
 
@@ -37,14 +42,22 @@ public class Organisation {
 
     @Override
     public String toString() {
-        return String.valueOf(homePage);
+        return "Organisation(" + homePage + ", " + position + ")";
     }
 
-    public static class Position {
+    public static class Position implements Serializable {
         private final LocalDate startDate;
         private final LocalDate finishDate;
         private final String title;
         private final String description;
+
+        public Position(int startYear, Month startMonth, String title, String description) {
+            this(of(startYear, startMonth), LocalDate.now(), title, description);
+        }
+
+        public Position(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
+            this(of(startYear, startMonth), of(endYear, endMonth), title, description);
+        }
 
         public Position(LocalDate startDate, LocalDate finishDate, String title, String description) {
             Objects.requireNonNull(startDate, "startDate must not be null");

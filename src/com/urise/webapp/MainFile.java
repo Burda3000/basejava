@@ -3,6 +3,7 @@ package com.urise.webapp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class MainFile {
     public static void main(String[] args) {
@@ -39,8 +40,9 @@ public class MainFile {
         if (file != null) {
             for (File name : file) {
                 if (name.isFile()) {
-                    System.out.println("The file's name is " + name.getName());
+                    System.out.println("    " + name.getName());
                 } else if (name.isDirectory()) {
+                    System.out.println("The catalog's name is " + name.getName() + " with files:");
                     getFiles(name);
                 }
             }
