@@ -17,7 +17,7 @@ public class MainFile {
             throw new RuntimeException("Error", e);
         }
 
-        File dir = new File("C:\\Users\\Ashcr\\Desktop\\TopJava\\basejava\\src\\com\\urise\\webapp");
+        File dir = new File("C:\\Users\\Ashcr\\Desktop\\TopJava\\basejava\\src");
         System.out.println(dir.isDirectory());
 
         String[] list = dir.list();
@@ -42,7 +42,7 @@ public class MainFile {
                 if (name.isFile()) {
                     System.out.println("    " + name.getName());
                 } else if (name.isDirectory()) {
-                    System.out.println("The catalog's name is " + name.getName() + " with files:");
+                    System.out.println(name.getName());
                     getFiles(name);
                 }
             }
