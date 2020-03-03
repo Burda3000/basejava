@@ -11,11 +11,11 @@ import java.util.Objects;
 public abstract class AbstractFileStorage extends AbstractStorage<File> {
     private File directory;
 
-    private ObjectStorageSerializable objectStorageSave;
+    protected abstract void doWrite(Resume r, OutputStream os) throws IOException;
 
-    protected AbstractFileStorage(File directory, ObjectStorageSerializable objectStorageSave) {
+    protected abstract Resume doRead(InputStream is) throws IOException;
 
-        this.objectStorageSave = objectStorageSave;
+    protected AbstractFileStorage(File directory) {
         Objects.requireNonNull(directory, "directory must not be null");
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
@@ -51,7 +51,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void doUpdate(File file, Resume resume) {
         try {
-            objectStorageSave.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
+            doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -70,7 +70,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected Resume doGet(File file) {
         try {
-            return objectStorageSave.doRead(new BufferedInputStream(new FileInputStream(file)));
+            return doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("Reading error", file.getName(), e);
         }
