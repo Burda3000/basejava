@@ -15,16 +15,15 @@ import java.util.stream.Stream;
 public abstract class AbstractPathStorage extends AbstractStorage<Path> {
     private Path directory;
 
-    protected abstract void doWrite(Resume r, OutputStream os) throws IOException;
+    private ObjectSerializationStream ObjectSerializationStream;
 
-    protected abstract Resume doRead(InputStream is) throws IOException;
-
-    protected AbstractPathStorage(String dir) {
+    protected AbstractPathStorage(String dir, ObjectSerializationStream objectSerializationStream) {
         directory = Paths.get(dir);
         Objects.requireNonNull(directory, "directory must not be null");
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
             throw new IllegalArgumentException(dir + " is not directory or is not writable");
         }
+        this.ObjectSerializationStream = objectSerializationStream;
     }
 
     @Override
@@ -47,7 +46,7 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
     @Override
     protected void doUpdate(Path path, Resume resume) {
         try {
-            doWrite(resume, new BufferedOutputStream(Files.newOutputStream(path)));
+            ObjectSerializationStream.doWrite(resume, new BufferedOutputStream(Files.newOutputStream(path)));
         } catch (IOException e) {
             throw new StorageException("Path write error", resume.getUuid(), e);
         }
@@ -71,7 +70,7 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
     @Override
     protected Resume doGet(Path path) {
         try {
-            return doRead(new BufferedInputStream(Files.newInputStream(path)));
+            return ObjectSerializationStream.doRead(new BufferedInputStream(Files.newInputStream(path)));
         } catch (IOException e) {
             throw new StorageException("Path read error", path.getFileName().toString(), e);
         }
