@@ -101,7 +101,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     private void getNullExceptionFiles(File[] files) {
         if (files == null) {
-            throw new StorageException("error: Files are null", null);
+            throw new StorageException("error: Files are null", (String) null);
         }
     }
 }
