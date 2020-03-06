@@ -2,6 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exeption.StorageException;
 import com.urise.webapp.model.Resume;
+import com.urise.webapp.storage.serializationStorage.ObjectSerializationStream;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -12,10 +13,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public abstract class PathStorage extends AbstractStorage<Path> {
+public class PathStorage extends AbstractStorage<Path> {
     private Path directory;
 
-    private ObjectSerializationStream ObjectSerializationStream;
+    private com.urise.webapp.storage.serializationStorage.ObjectSerializationStream ObjectSerializationStream;
 
     protected PathStorage(String dir, ObjectSerializationStream objectSerializationStream) {
         directory = Paths.get(dir);

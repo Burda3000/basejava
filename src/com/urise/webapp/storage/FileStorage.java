@@ -2,16 +2,17 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exeption.StorageException;
 import com.urise.webapp.model.Resume;
+import com.urise.webapp.storage.serializationStorage.ObjectSerializationStream;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class FileStorage extends AbstractStorage<File> {
+public class FileStorage extends AbstractStorage<File> {
     private File directory;
 
-    private ObjectSerializationStream ObjectSerializationStream;
+    private com.urise.webapp.storage.serializationStorage.ObjectSerializationStream ObjectSerializationStream;
 
     protected FileStorage(File directory, ObjectSerializationStream objectSerializationStream) {
         Objects.requireNonNull(directory, "directory must not be null");
