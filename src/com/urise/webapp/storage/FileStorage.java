@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
+public abstract class FileStorage extends AbstractStorage<File> {
     private File directory;
 
     private ObjectSerializationStream ObjectSerializationStream;
 
-    protected AbstractFileStorage(File directory, ObjectSerializationStream objectSerializationStream) {
+    protected FileStorage(File directory, ObjectSerializationStream objectSerializationStream) {
         Objects.requireNonNull(directory, "directory must not be null");
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
@@ -94,6 +94,9 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     }
 
     private File[] getNullExceptionFiles() {
+        if (directory.listFiles() == null) {
+            throw new StorageException("File has not been deleted", (String) null);
+        }
         return directory.listFiles();
     }
 }

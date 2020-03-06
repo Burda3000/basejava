@@ -12,12 +12,12 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public abstract class AbstractPathStorage extends AbstractStorage<Path> {
+public abstract class PathStorage extends AbstractStorage<Path> {
     private Path directory;
 
     private ObjectSerializationStream ObjectSerializationStream;
 
-    protected AbstractPathStorage(String dir, ObjectSerializationStream objectSerializationStream) {
+    protected PathStorage(String dir, ObjectSerializationStream objectSerializationStream) {
         directory = Paths.get(dir);
         Objects.requireNonNull(directory, "directory must not be null");
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
@@ -28,13 +28,13 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
 
     @Override
     public void clear() {
-        getNullExceptionPaths(new Path[]{directory});
+        getNullExceptionPaths(directory);
         getListFiles().forEach(this::doDelete);
     }
 
     @Override
     public int size() {
-        getNullExceptionPaths(new Path[]{directory});
+        getNullExceptionPaths(directory);
         return (int) getListFiles().count();
     }
 
@@ -87,12 +87,12 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> getAllCopy() {
-        getNullExceptionPaths(new Path[]{directory});
+        getNullExceptionPaths(directory);
         return getListFiles().map(this::doGet).collect(Collectors.toList());
     }
 
 
-    private void getNullExceptionPaths(Path[] paths) {
+    private void getNullExceptionPaths(Path paths) {
         if (paths == null) {
             throw new StorageException("error: Paths are null", (String) null);
         }
