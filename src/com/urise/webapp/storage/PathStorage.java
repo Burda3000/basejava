@@ -4,7 +4,9 @@ import com.urise.webapp.exeption.StorageException;
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.storage.serializationStorage.ObjectSerializationStream;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,13 +31,11 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     public void clear() {
-        getNullExceptionPaths(directory);
         getListFiles().forEach(this::doDelete);
     }
 
     @Override
     public int size() {
-        getNullExceptionPaths(directory);
         return (int) getListFiles().count();
     }
 
@@ -88,15 +88,7 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> getAllCopy() {
-        getNullExceptionPaths(directory);
         return getListFiles().map(this::doGet).collect(Collectors.toList());
-    }
-
-
-    private void getNullExceptionPaths(Path paths) {
-        if (paths == null) {
-            throw new StorageException("error: Paths are null", (String) null);
-        }
     }
 
     private Stream<Path> getListFiles() {
