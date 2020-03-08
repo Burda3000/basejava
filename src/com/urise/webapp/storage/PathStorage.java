@@ -18,15 +18,16 @@ import java.util.stream.Stream;
 public class PathStorage extends AbstractStorage<Path> {
     private Path directory;
 
-    private com.urise.webapp.storage.serializationStorage.ObjectSerializationStream ObjectSerializationStream;
+    private ObjectSerializationStream ObjectSerializationStream;
 
     protected PathStorage(String dir, ObjectSerializationStream objectSerializationStream) {
+        Objects.requireNonNull(dir, "directory must not be null");
+
+        this.ObjectSerializationStream = objectSerializationStream;
         directory = Paths.get(dir);
-        Objects.requireNonNull(directory, "directory must not be null");
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
             throw new IllegalArgumentException(dir + " is not directory or is not writable");
         }
-        this.ObjectSerializationStream = objectSerializationStream;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     protected boolean isExist(Path path) {
-        return Files.exists(path);
+        return Files.isRegularFile(path);
     }
 
     @Override

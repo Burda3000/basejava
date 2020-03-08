@@ -12,10 +12,12 @@ import java.util.Objects;
 public class FileStorage extends AbstractStorage<File> {
     private File directory;
 
-    private com.urise.webapp.storage.serializationStorage.ObjectSerializationStream ObjectSerializationStream;
+    private ObjectSerializationStream ObjectSerializationStream;
 
     protected FileStorage(File directory, ObjectSerializationStream objectSerializationStream) {
         Objects.requireNonNull(directory, "directory must not be null");
+
+        this.ObjectSerializationStream = objectSerializationStream;
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
         }
@@ -23,7 +25,6 @@ public class FileStorage extends AbstractStorage<File> {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
         }
         this.directory = directory;
-        this.ObjectSerializationStream = objectSerializationStream;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class FileStorage extends AbstractStorage<File> {
         try {
             ObjectSerializationStream.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
-            throw new StorageException("IO error", file.getName(), e);
+            throw new StorageException("File write error", resume.getUuid(), e);
         }
     }
 
@@ -60,7 +61,7 @@ public class FileStorage extends AbstractStorage<File> {
             file.createNewFile();
             doUpdate(file, resume);
         } catch (IOException e) {
-            throw new StorageException("IO error", file.getName(), e);
+            throw new StorageException("Couldn't create file " + file.getAbsolutePath(), file.getName(), e);
         }
     }
 
