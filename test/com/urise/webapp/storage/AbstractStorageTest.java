@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.List;
 
 public abstract class AbstractStorageTest {
-    protected static final File STORAGE_DIR = new File("C:\\Users\\Ashcr\\Desktop\\TopJava\\basejava\\storage");
+    static final File STORAGE_DIR = new File("C:\\Users\\Ashcr\\Desktop\\TopJava\\basejava\\storage");
 
     Storage storage;
 
@@ -66,8 +66,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() throws Exception {
-        storage.update(RESUME_1);
-        Assert.assertSame(RESUME_1, storage.get(UUID_1));
+        Resume newResume = new Resume(UUID_1, "New resume");
+        storage.update(newResume);
+        Assert.assertEquals(newResume, storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageException.class)

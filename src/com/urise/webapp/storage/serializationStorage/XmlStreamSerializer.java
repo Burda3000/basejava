@@ -6,7 +6,7 @@ import com.urise.webapp.utill.XmlParser;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class XmlStreamSerializer implements ObjectSerialization {
+public class XmlStreamSerializer implements StreamSerializer {
     private XmlParser xmlParser;
 
     public XmlStreamSerializer() {

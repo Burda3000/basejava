@@ -1,7 +1,10 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.utill.LocalDateAdapter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -51,8 +54,11 @@ public class Organisation implements Serializable {
         return "Organisation(" + homePage + ", " + position + ")";
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate startDate;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate finishDate;
         private String title;
         private String description;
@@ -82,13 +88,11 @@ public class Organisation implements Serializable {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-
-            Position positions = (Position) o;
-
-            if (!startDate.equals(positions.startDate)) return false;
-            if (!finishDate.equals(positions.finishDate)) return false;
-            if (!title.equals(positions.title)) return false;
-            return description.equals(positions.description);
+            Position position = (Position) o;
+            return startDate.equals(position.startDate) &&
+                    finishDate.equals(position.finishDate) &&
+                    title.equals(position.title) &&
+                    description.equals(position.description);
         }
 
         @Override
