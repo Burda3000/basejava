@@ -1,5 +1,7 @@
 package com.urise.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -10,10 +12,14 @@ import java.util.Objects;
 
 import static com.urise.webapp.utill.DateUtill.of;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organisation implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final Link homePage;
+    private Link homePage;
     private List<Position> position = new ArrayList<>();
+
+    public Organisation() {
+    }
 
     public Organisation(String name, String url, Position... position) {
         this(new Link(name, url), Arrays.asList((position)));
@@ -46,10 +52,13 @@ public class Organisation implements Serializable {
     }
 
     public static class Position implements Serializable {
-        private final LocalDate startDate;
-        private final LocalDate finishDate;
-        private final String title;
-        private final String description;
+        private LocalDate startDate;
+        private LocalDate finishDate;
+        private String title;
+        private String description;
+
+        public Position() {
+        }
 
         public Position(int startYear, Month startMonth, String title, String description) {
             this(of(startYear, startMonth), LocalDate.now(), title, description);
