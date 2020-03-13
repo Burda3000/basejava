@@ -6,6 +6,8 @@ import com.urise.webapp.model.Section;
 import com.urise.webapp.model.SectionType;
 
 import java.io.*;
+import java.util.Collection;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class DataStreamSerializer implements StreamSerializer {
@@ -15,6 +17,7 @@ public class DataStreamSerializer implements StreamSerializer {
         try (DataOutputStream dos = new DataOutputStream(os)) {
             dos.writeUTF(r.getUuid());
             dos.writeUTF(r.getFullName());
+
             Map<ContactType, String> contacts = r.getContact();
             dos.writeInt(contacts.size());
             for (Map.Entry<ContactType, String> entry : contacts.entrySet()) {
@@ -24,10 +27,12 @@ public class DataStreamSerializer implements StreamSerializer {
             // TODO implements sections
             Map<SectionType, Section> sections = r.getSection();
             dos.writeInt(sections.size());
-            for (Map.Entry<SectionType, Section> entry : sections.entrySet()) {
-                dos.writeUTF(entry.getKey().name());
-                dos.writeUTF(entry.getValue().toString());
-            }
+            dos.writeUTF(String.valueOf(r.getSection(SectionType.PERSONAL)));
+            dos.writeUTF(String.valueOf(r.getSection(SectionType.OBJECTIVE)));
+            dos.writeUTF(String.valueOf(r.getSection(SectionType.ACHIEVEMENT)));
+            dos.writeUTF(String.valueOf(r.getSection(SectionType.QUALIFICATIONS)));
+            dos.writeUTF(String.valueOf(r.getSection(SectionType.EXPERIENCE)));
+            dos.writeUTF(String.valueOf(r.getSection(SectionType.EDUCATION)));
         }
     }
 
@@ -42,9 +47,13 @@ public class DataStreamSerializer implements StreamSerializer {
                 resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF());
             }
             // TODO implements sections
-            for (int i = 0; i < size; i++) {
-                resume.addSection(SectionType.valueOf(dis.readUTF()), dis.readUTF());
-            }
+            SectionType sectionType = SectionType.valueOf(dis.readUTF());
+            resume.addSection(sectionType, resume.getSection().get(SectionType.PERSONAL));
+            resume.addSection(sectionType, resume.getSection().get(SectionType.OBJECTIVE));
+            resume.addSection(sectionType, resume.getSection().get(SectionType.ACHIEVEMENT));
+            resume.addSection(sectionType, resume.getSection().get(SectionType.QUALIFICATIONS));
+            resume.addSection(sectionType, resume.getSection().get(SectionType.EXPERIENCE));
+            resume.addSection(sectionType, resume.getSection().get(SectionType.EDUCATION));
             return resume;
         }
     }
