@@ -6,8 +6,6 @@ import com.urise.webapp.model.Section;
 import com.urise.webapp.model.SectionType;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.EnumMap;
 import java.util.Map;
 
 public class DataStreamSerializer implements StreamSerializer {
@@ -26,13 +24,12 @@ public class DataStreamSerializer implements StreamSerializer {
             }
             // TODO implements sections
             Map<SectionType, Section> sections = r.getSection();
-            dos.writeInt(sections.size());
-            dos.writeUTF(String.valueOf(r.getSection(SectionType.PERSONAL)));
-            dos.writeUTF(String.valueOf(r.getSection(SectionType.OBJECTIVE)));
-            dos.writeUTF(String.valueOf(r.getSection(SectionType.ACHIEVEMENT)));
-            dos.writeUTF(String.valueOf(r.getSection(SectionType.QUALIFICATIONS)));
-            dos.writeUTF(String.valueOf(r.getSection(SectionType.EXPERIENCE)));
-            dos.writeUTF(String.valueOf(r.getSection(SectionType.EDUCATION)));
+            dos.writeUTF(String.valueOf(sections.get(SectionType.PERSONAL)));
+            dos.writeUTF(String.valueOf(sections.get(SectionType.OBJECTIVE)));
+            dos.writeUTF(String.valueOf(sections.get(SectionType.ACHIEVEMENT)));
+            dos.writeUTF(String.valueOf(sections.get(SectionType.QUALIFICATIONS)));
+            dos.writeUTF(String.valueOf(sections.get(SectionType.EXPERIENCE)));
+            dos.writeUTF(String.valueOf(sections.get(SectionType.EDUCATION)));
         }
     }
 
@@ -48,12 +45,7 @@ public class DataStreamSerializer implements StreamSerializer {
             }
             // TODO implements sections
             SectionType sectionType = SectionType.valueOf(dis.readUTF());
-            resume.addSection(sectionType, resume.getSection().get(SectionType.PERSONAL));
-            resume.addSection(sectionType, resume.getSection().get(SectionType.OBJECTIVE));
-            resume.addSection(sectionType, resume.getSection().get(SectionType.ACHIEVEMENT));
-            resume.addSection(sectionType, resume.getSection().get(SectionType.QUALIFICATIONS));
-            resume.addSection(sectionType, resume.getSection().get(SectionType.EXPERIENCE));
-            resume.addSection(sectionType, resume.getSection().get(SectionType.EDUCATION));
+            resume.addSection(sectionType, resume.getSection(SectionType.PERSONAL));
             return resume;
         }
     }
