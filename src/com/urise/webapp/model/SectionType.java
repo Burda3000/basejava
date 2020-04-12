@@ -9,6 +9,7 @@ public enum SectionType {
     EDUCATION("Образование");
 
     private final String title;
+    private Object SectionType;
 
     SectionType(String title) {
         this.title = title;
@@ -16,5 +17,9 @@ public enum SectionType {
 
     public String getTitle() {
         return title;
+    }
+
+    public static SectionType getSectionType(Object SectionType) {
+        return (com.urise.webapp.model.SectionType) SectionType;
     }
 }
