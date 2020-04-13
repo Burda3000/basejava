@@ -18,8 +18,4 @@ public enum SectionType {
     public String getTitle() {
         return title;
     }
-
-    public static SectionType getSectionType(Object SectionType) {
-        return (com.urise.webapp.model.SectionType) SectionType;
-    }
 }

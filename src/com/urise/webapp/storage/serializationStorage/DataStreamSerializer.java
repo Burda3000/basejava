@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.urise.webapp.model.SectionType.getSectionType;
-
 public class DataStreamSerializer implements StreamSerializer {
 
     @Override
@@ -79,13 +77,11 @@ public class DataStreamSerializer implements StreamSerializer {
 
     private void writeTextSection(DataOutputStream dos, Resume r, SectionType sectionType) throws IOException {
         TextSection textSection = (TextSection) r.getSection(sectionType);
-        dos.writeUTF(sectionType.name());
         dos.writeUTF(textSection.getContent());
     }
 
     private void writeListSection(DataOutputStream dos, Resume r, SectionType sectionType) throws IOException {
         ListSection listSection = (ListSection) r.getSection(sectionType);
-        dos.writeUTF(sectionType.name());
         List<String> items = listSection.getItems();
         dos.writeInt(items.size());
 
@@ -96,12 +92,13 @@ public class DataStreamSerializer implements StreamSerializer {
 
     private void writeOrganization(DataOutputStream dos, Resume r, SectionType sectionType) throws IOException {
         OrganizationSection organizationSection = (OrganizationSection) r.getSection(sectionType);
-        dos.writeUTF(sectionType.name());
         List<Organisation> organisations = organizationSection.getOrganisations();
         dos.writeInt(organisations.size());
 
         for (Organisation organisation : organisations) {
-            dos.writeUTF(organisation.getHomePage().toString());
+            dos.writeUTF(organisation.getHomePage().getName());
+            dos.writeUTF(organisation.getHomePage().getUrl());
+
             List<Organisation.Position> positionList = organisation.getPosition();
             dos.writeInt(positionList.size());
             for (Organisation.Position position : positionList) {
@@ -116,7 +113,7 @@ public class DataStreamSerializer implements StreamSerializer {
     private void readTextSection(DataInputStream dis, Resume resume) throws IOException {
         String key = dis.readUTF();
         String value = dis.readUTF();
-        resume.addSection(getSectionType(key), new TextSection(value));
+        resume.addSection(SectionType.valueOf(key), new TextSection(value));
     }
 
     private void readListSection(DataInputStream dis, Resume resume) throws IOException {
@@ -127,7 +124,7 @@ public class DataStreamSerializer implements StreamSerializer {
             items.add(dis.readUTF());
         }
         if (items.size() != 0) {
-            resume.addSection(getSectionType(key), new ListSection(items));
+            resume.addSection(SectionType.valueOf(key), new ListSection(items));
         }
     }
 
@@ -137,7 +134,7 @@ public class DataStreamSerializer implements StreamSerializer {
         int organisationSize = dis.readInt();
 
         for (int i = 0; i < organisationSize; i++) {
-            Organisation organisation = new Organisation(new Link(dis.readUTF()), new ArrayList<>());
+            Organisation organisation = new Organisation(new Link(dis.readUTF(), dis.readUTF()), new ArrayList<>());
             int perodSize = dis.readInt();
             for (int j = 0; j < perodSize; j++) {
                 organisation.addPosition1(new Organisation.Position(
@@ -148,6 +145,6 @@ public class DataStreamSerializer implements StreamSerializer {
             }
             organisationList.add(organisation);
         }
-        resume.addSection(getSectionType(key), new OrganizationSection(organisationList));
+        resume.addSection(SectionType.valueOf(key), new OrganizationSection(organisationList));
     }
 }

@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.List;
 
 public abstract class AbstractStorageTest {
-    static final File STORAGE_DIR = new File("C:\\Users\\Ashcr\\Desktop\\TopJava\\basejava\\storage");
+    static final File STORAGE_DIR = new File("/home/aleksandr/basejava/storage");
 
     Storage storage;
 

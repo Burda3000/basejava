@@ -19,8 +19,6 @@ public class Link implements Serializable {
         this.url = url;
     }
 
-    public Link(String readUTF) {}
-
     public String getName() {
         return name;
     }
