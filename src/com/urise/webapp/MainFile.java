@@ -3,11 +3,10 @@ package com.urise.webapp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class MainFile {
     public static void main(String[] args) {
-        String filePath = ".\\.gitignore";
+        String filePath = ".//.gitignore";
 
         File file = new File(filePath);
 
@@ -17,7 +16,7 @@ public class MainFile {
             throw new RuntimeException("Error", e);
         }
 
-        File dir = new File("C:\\Users\\Ashcr\\Desktop\\TopJava\\basejava\\src");
+        File dir = new File("/home/aleksandr/basejava/src");
         System.out.println(dir.isDirectory());
 
         String[] list = dir.list();

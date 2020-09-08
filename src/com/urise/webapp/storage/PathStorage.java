@@ -2,9 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exeption.StorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.serializationStorage.ObjectStreamSerializer;
 import com.urise.webapp.storage.serializationStorage.StreamSerializer;
-import com.urise.webapp.storage.serializationStorage.XmlStreamSerializer;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -31,12 +29,6 @@ public class PathStorage extends AbstractStorage<Path> {
             throw new IllegalArgumentException(dir + " is not directory or is not writable");
         }
     }
-
-//    public PathStorage(String dir, XmlStreamSerializer xmlStreamSerializer) {
-//        super();
-//    }
-
-
 
     @Override
     public void clear() {
